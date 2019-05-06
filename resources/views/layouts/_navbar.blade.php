@@ -16,7 +16,7 @@
                 <a class="nav-link active" href="{{route('home')}}">Anasayfam</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('users.sticks.create',['id'=>Auth::user()->id, 'parent'=>Auth::user()])}}">Stick</a>
+                <a class="nav-link" href="{{route('users.sticks.create',['id'=>Auth::user()->id])}}">Stick</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('groups.index',['username'=>Auth::user()->username])}}">Gruplar</a>
