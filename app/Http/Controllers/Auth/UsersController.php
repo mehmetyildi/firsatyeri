@@ -104,6 +104,7 @@ class UsersController extends BaseController{
     }
 
     public function create_stick($id){
+        dd($id);
         $user=User::find($id);
         $parent=$user;
         $boards=$user->boards()->get();
