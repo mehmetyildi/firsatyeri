@@ -85,6 +85,23 @@ class BaseController extends Controller
         $record->$column = $finalName;
     }
 
+    public function handleUserImageUpload($record,$urlColumn,$diff,$imageFile,$column,$width,$height){
+
+        if(!$imageFile){
+            return;
+        }
+        $keyString = self::seo_friendly_url($record->$urlColumn);
+        $filename = $keyString.'_'.$diff.'_'.time();
+        $image = Image::make($imageFile);
+        if(isNotImage($image->mime())){
+            session()->flash('danger', 'You can only upload .png or .jpg files');
+            return redirect()->back();
+        }
+        $finalName = $filename.getImageExtension($image->mime());
+        $image->resize($width,$height)->save(public_path('storage/'.$finalName));
+        $record->$column = $finalName;
+    }
+
     public function handleImageUploadNoResize($record,$urlColumn,$diff,$imageFile,$column){
 
         if(!$imageFile){

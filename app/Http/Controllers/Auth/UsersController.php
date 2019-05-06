@@ -58,7 +58,7 @@ class UsersController extends BaseController{
 
         if($request->hasFile('image_url')){
             $imageField=$this->imageFields[0];
-            parent::handleImageUpload(
+            parent::handleUserImageUpload(
                 $record,
                 $imageField['naming'],
                 $imageField['diff'],
@@ -77,7 +77,7 @@ class UsersController extends BaseController{
         $record=PageModel::where('id',$id)->firstOrFail();
         if($request->hasFile('main_image')){
             $imageField=$this->imageFields[1];
-            parent::handleImageUpload(
+            parent::handleUserImageUpload(
                 $record,
                 $imageField['naming'],
                 $imageField['diff'],
