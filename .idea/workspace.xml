@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="619a2f04-32a8-4538-ae5c-10a1b629c21e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/UsersController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +80,7 @@
           <entry key="env" value="17" />
           <entry key="js" value="102" />
           <entry key="json" value="1" />
-          <entry key="php" value="26916" />
+          <entry key="php" value="26924" />
           <entry key="scss" value="6" />
         </counts>
       </usages-collector>
@@ -91,7 +91,7 @@
           <entry key="CSS" value="364" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="102" />
-          <entry key="PHP" value="16206" />
+          <entry key="PHP" value="16214" />
           <entry key="SCSS" value="6" />
         </counts>
       </usages-collector>
@@ -115,16 +115,16 @@
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="171">
-              <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+              <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/UsersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="111" column="69" selection-start-line="111" selection-start-column="63" selection-end-line="111" selection-end-column="69" />
+            <state relative-caret-position="306">
+              <caret line="105" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
               <folding>
                 <element signature="e#43#83#0#PHP" expanded="true" />
               </folding>
@@ -137,27 +137,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="561">
               <caret line="36" column="71" lean-forward="true" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/components/create_stick_button.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/Stick.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="91" column="45" selection-start-line="91" selection-start-column="45" selection-end-line="91" selection-end-column="45" />
-              <folding>
-                <element signature="e#110#123#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -478,6 +457,13 @@
               <item name="firsatyeri" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="sticks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="firsatyeri" type="b2602c69:ProjectViewProjectNode" />
+              <item name="firsatyeri" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -553,11 +539,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172692000" />
+    <option name="totallyTimeSpent" value="172942000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49836066" visible="true" weight="0.22314675" />
       <window_info id="Structure" order="1" sideWeight="0.50163937" side_tool="true" weight="0.2677761" />
@@ -946,17 +931,14 @@
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+          <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/UsersController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/components/create_stick_button.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="111" column="69" selection-start-line="111" selection-start-column="63" selection-end-line="111" selection-end-column="69" />
-          <folding>
-            <element signature="e#43#83#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -967,10 +949,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/components/create_stick_button.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/UsersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="306">
+          <caret line="105" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
+          <folding>
+            <element signature="e#43#83#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
