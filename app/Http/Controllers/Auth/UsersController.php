@@ -109,7 +109,7 @@ class UsersController extends BaseController{
         $boards=$user->boards()->get();
         $cities=City::all();
 
-        return view('sticks.create',compact('boards','cities','parent',$this->pageUrl));
+        return view('users.create_stick',compact('boards','cities','parent',$this->pageUrl));
     }
 
     public function store_stick(Request $request,$id){

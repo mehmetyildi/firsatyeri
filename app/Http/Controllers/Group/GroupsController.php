@@ -93,7 +93,7 @@ class GroupsController extends BaseController{
         $boards=$group->boards()->get();
         $cities=City::all();
 
-        return view('sticks.create',compact('boards','cities','parent',$this->pageUrl));
+        return view('groups.create_stick',compact('boards','cities','parent',$this->pageUrl));
     }
 
     public function store_stick(Request $request,$id){
