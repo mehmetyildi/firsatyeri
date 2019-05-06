@@ -1,0 +1,12 @@
+html, body {
+
+    background-color: #c6c8ca;
+
+    min-height: 100%;
+}
+
+
+.card{
+    margin-bottom: 100px;
+    max-width: 50%;
+}
