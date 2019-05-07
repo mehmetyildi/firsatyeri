@@ -33,7 +33,6 @@ Route::middleware('auth')->group(function (){
             Route::name('sticks.detail')->get('/sticks/detail/{stick}','UsersController@sticks_detail');
             Route::name('boards.create')->get('/boards/{id}/create','UsersController@create_board');
             Route::name('boards.store')->post('/boards/store/{id}','UsersController@store_board');
-
             Route::name('follow')->get('/follow/{following}','UsersController@follow');
             Route::name('unfollow')->get('/unfollow/{following}','UsersController@unfollow');
             Route::name('boards.index')->get('{username}/boards/index','UsersController@boards_index');

@@ -56,5 +56,7 @@ class Board extends BaseModel{
     public function interests(){
         return $this->belongsToMany(Interest::class);
     }
+
+
 }
 

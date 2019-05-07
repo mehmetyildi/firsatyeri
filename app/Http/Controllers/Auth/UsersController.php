@@ -138,18 +138,19 @@ class UsersController extends BaseController{
             $stick=new Stick(request(['name','content','before_price','sale_price','city_id','district_id']))
             ,$record->image_path,$record->begin_date,$record->end_date
         );
-
-        $board=$user->boards()->where('id', $request->board_id)->firstOrFail();
+        $board=$user->boards()->find($request->board_id);
         if($board!=null){
             $board->sticks()->save($stick);
         }
         else{
+
             $board_new=new Board;
             $board_new->name=$request->board_id;
+
             $user->boards()->save($board_new);
             $board_new->sticks()->save($stick);
         }
-        return redirect()->route($this->pageUrl.'.detail',['username'=>$user->username]);
+        return redirect()->route('users.detail',['username'=>$user->username]);
     }
 
     public function create_board($id){
