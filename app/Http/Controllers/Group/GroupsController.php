@@ -70,7 +70,7 @@ class GroupsController extends BaseController{
 
 
         session()->flash('success', 'Yeni '.$this->pageItem.' oluşturuldu.');
-        return redirect()->route('groups.index',$record->id);
+        return redirect()->route('groups.detail',$record->id);
     }
 
     public function index($username){
