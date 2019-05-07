@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function (){
             Route::name('boards.index')->get('{username}/boards/index','UsersController@boards_index');
             Route::name('follow')->get('/follow/{following}','UsersController@follow');
             Route::name('unfollow')->get('/unfollow/{following}','UsersController@unfollow');
+            Route::name('board.detail')->get('{id}/boards/{board}/detail', 'UsersController@boards_detail');
         }
     );
 

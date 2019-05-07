@@ -1,27 +1,30 @@
 <div class="card card-pin col-md-3 col">
     <div class="board-preview-container">
         <div class="board-preview-grid">
+
             <div class="board-preview-row">
+
                 <div class="board-preview-cell">
-                    <img src="http://lorempixel.com/420/420/technics/4">
+                    <img @if(count($board->sticks)>0) src="{{$board->sticks[0]->image_path}}" @endif >
                 </div>
+
                 <div class="board-preview-cell">
-                    <img src="">
+                    <img @if(count($board->sticks)>1) src="{{$board->sticks[1]->image_path}}" @endif>
                 </div>
             </div>
             <div class="board-preview-row board-preview-row--mid">
                 <div class="board-preview-cell">
-                    <img src="">
+                    <img @if(count($board->sticks)>2)src="{{$board->sticks[2]->image_path}}" @endif>
                 </div>
                 <div class="board-preview-cell">
-                    <img src="">
+                    <img @if(count($board->sticks)>3) src="{{$board->sticks[3]->image_path}}" @endif>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <a href="">
+    <a href="{{route($pageUrl.'.board.detail',['id'=>$record->id,'board'=>$board->id])}}">
         <div class="overlay">
             <h2 class="card-title title">{{$board->name}}</h2>
 

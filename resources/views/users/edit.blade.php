@@ -5,7 +5,7 @@
         <h1 style="text-align: center">Profilini Düzenle</h1>
         <p>Diğer kullanıcıların seni daha iyi tanıması için aşağdaki bilgilere ihtiyacımız var.</p>
         <div class="button-center">
-            <img src="{{url('storage/'.$record->image_url)}}" alt="profile_image"
+            <img src="{{url('storage/'.$record->image_url)}}" alt="profile_image" onerror="this.src='{{$record->image_url}}'"
                  style="height: 150px; width: 150px; float:left; border-radius: 50%;margin-right: 25px">
             <button type="button" data-toggle="modal" data-target="#userPhoto" class="btn btn-gray200">Değiştir</button>
 

@@ -25,7 +25,7 @@
 
 
                     <div style="margin-top: 30px" class="button-center">
-                        <img id="blah" src="{{url('/storage/'.$group->image_path)}}" alt="your image"/>
+                        <img id="blah" src="{{url('/storage/'.$group->image_path)}}" onerror="this.src='{{$group->image_path}}'" alt="your image"/>
                     </div>
 
                     <div class="button-center">

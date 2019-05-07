@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="profile-pic ">
-        <img src="{{url('storage/'.$record->image_path)}}" alt="">
+        <img src="{{url('storage/'.$record->image_path)}}" onerror="this.src='{{$record->image_path}}'" alt="">
         <div class="edit"><a data-toggle="modal" data-target="#userPhoto" href="#"><i class="fas fa-edit fa-lg"></i></a></div>
     </div>
     <div class="container mb-4">

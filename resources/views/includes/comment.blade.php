@@ -6,6 +6,7 @@
             <div class="flex-center">
                 <a href="{{route('users.detail',['username'=>$comment->user->username])}}" class="media-object float-left">
                     <img alt=""
+                         onerror="this.src='{{$comment->user->image_url}}'"
                          src="{{url('/storage/'.$comment->user->image_url)}}"
                          class="avatar avatar-50 photo comment_avatar rounded-circle"
                          height="50" width="50"> </a>

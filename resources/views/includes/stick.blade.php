@@ -3,7 +3,9 @@
 
         <img class="card-img"
              src="{{url('/storage/'.$stick->image_path)}}"
-             alt="Card image">
+             alt="{{$stick->image_path}}"
+             onerror="this.src='{{$stick->image_path}}';"
+        >
         <a href="{{route($pageUrl.'.sticks.detail',['stick'=>$stick->id])}}">
         <div class="overlay">
             <h2 class="card-title title">{{$stick->name}}</h2>

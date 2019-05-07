@@ -38,7 +38,7 @@
 
                         <br>
                         <div class="button-center">
-                            <img id="blah" style="display: none" src="#" alt="your image" />
+                            <img id="blah" style="display: none"  src="#" alt="your image" />
                         </div>
 
                     </div>

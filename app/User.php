@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Board;
+use App\Models\Interest;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -176,5 +177,9 @@ class User extends Authenticatable
     public function publishComment(Comment $comment, $id){
         $comment->stick_id=$id;
         $this->comments()->save($comment);
+    }
+
+    public function interests(){
+        return $this->belongsToMany(Interest::class);
     }
 }

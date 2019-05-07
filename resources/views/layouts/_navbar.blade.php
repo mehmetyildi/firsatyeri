@@ -23,7 +23,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('users.detail',['username'=>Auth::user()->username])}}"><img class="rounded-circle mr-2" src="{{url('storage/'.Auth::user()->image_url)}}" width="30"><span class="align-middle">{{Auth::user()->username}}</span></a>
+                <a class="nav-link" href="{{route('users.detail',['username'=>Auth::user()->username])}}"><img class="rounded-circle mr-2" src="{{url('storage/'.Auth::user()->image_url)}}" onerror="this.src='{{Auth::user()->image_url}}'" width="30"><span class="align-middle">{{Auth::user()->username}}</span></a>
             </li>
 
         </ul>

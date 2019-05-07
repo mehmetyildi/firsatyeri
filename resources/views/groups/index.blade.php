@@ -13,6 +13,7 @@
                         <div class="col-md-6" style="border: solid; border-radius: 5px; border-width: 1px">
                             <a href="{{route('groups.detail',['id'=>$o->id])}}">
                             <img src="{{url('storage/'.$o->image_path)}}" alt="profile_image"
+                                 onerror="this.src='{{$o->image_path}}'"
                                  style="height: 150px; width: 150px; float:left; border-radius: 50%;margin-right: 25px">
                             <p>{{$o->name}}</p>
                             </a>
@@ -38,6 +39,7 @@
                         <div class="col-md-6" style="border: solid; border-radius: 5px; border-width: 1px">
                             <a href="{{route('groups.detail',['id'=>$admin->id])}}">
                             <img src="{{url('storage/'.$o->image_path)}}" alt="profile_image"
+                                 onerror="this.src='{{$o->image_path}}'"
                                  style="height: 150px; width: 150px; float:left; border-radius: 50%;margin-right: 25px">
                             <p>{{$admin->name}}</p>
                             </a>
@@ -63,6 +65,7 @@
                         <div class="col-md-6" style="border: solid; border-radius: 5px; border-width: 1px">
                             <a href="{{route('groups.detail',['id'=>$f->id])}}">
                             <img src="{{url('storage/'.$f->image_path)}}" alt="profile_image"
+                                 onerror="this.src='{{$f->image_path}}'"
                                  style="height: 150px; width: 150px; float:left; border-radius: 50%;margin-right: 25px">
                             <p>{{$f->name}}</p>
                             </a>

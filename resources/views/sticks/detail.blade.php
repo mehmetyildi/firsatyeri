@@ -8,7 +8,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-7">
                     <article class="card">
-                        <img class="card-img-top mb-2" src="{{url('/storage/'.$stick->image_path)}}" alt="Card image">
+                        <img class="card-img-top mb-2" src="{{url('/storage/'.$stick->image_path)}}" onerror="this.src='{{$stick->image_path}}'" alt="Card image">
                         <div class="card-body">
                             <h1 class="card-title display-4">
                                 {{$stick->name}} </h1>

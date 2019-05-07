@@ -36,7 +36,7 @@ class HomeController extends Controller{
 
     public function home(){
         $sticks=Stick::
-        orderBy('created_at','desc')->get();
+        orderBy('created_at','desc')->take(50)->get();
         return view('home', compact('sticks'));
     }
 }

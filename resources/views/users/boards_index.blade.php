@@ -4,11 +4,11 @@
 @endsection
 @section('content')
     <div class="profile-pic">
-        <img src="{{url('storage/'.$record->main_image)}}" alt="">
+        <img src="{{url('storage/'.$record->main_image)}}" onerror="this.src='{{$record->main_image}}'" alt="">
         <div class="edit"><a data-toggle="modal" data-target="#userPhoto" href="#"><i class="fas fa-edit fa-lg"></i></a></div>
     </div>
     <div class="container mb-4">
-        <img src="{{url('storage/'.$record->image_url)}}" style="position: absolute;" class="mt-neg100 mb-4 rounded-circle" width="128">
+        <img src="{{url('storage/'.$record->image_url)}}" onerror="this.src='{{$record->image_url}}'" style="position: absolute;" class="mt-neg100 mb-4 rounded-circle" width="128">
         <div class="row" style="padding-top: 50px;">
             <div class="col">
                 <h1 class="font-weight-bold title">{{$record->username}}</h1>
