@@ -1,25 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="profile-pic">
-        <img  src="{{url('storage/'.$record->main_image)}}" onerror="this.src='{{$record->main_image}}'" alt="">
+    <div class="profile-pic ">
+        <img src="{{url('storage/'.$record->image_path)}}" onerror="this.src='{{$record->image_path}}'" alt="">
         <div class="edit"><a data-toggle="modal" data-target="#userPhoto" href="#"><i class="fas fa-edit fa-lg"></i></a></div>
     </div>
     <div class="container mb-4">
-        <img src="{{url('storage/'.$record->image_url)}}" style="position: absolute;" onerror="this.src='{{$record->image_url}}'" class="mt-neg100 mb-4 rounded-circle" width="128">
         <div class="row" style="padding-top: 50px;">
             <div class="col">
                 <h1 class="font-weight-bold title">{{$record->username}}</h1>
             </div>
             <div class="col">
-                @if($record==Auth::user())
+                @if(Auth::user()->isOwnerOf($record))
                     @include('components.edit_button')
                     @include('components.create_stick_button')
                     @include('components.create_board_button')
-                @elseif(!Auth::user()->follows($record->username))
-                    @include('components.follow_user_button')
+                    @include('components.create_wanted_button')
+                @elseif(!Auth::user()->isMemberOfThis($record))
+                    @include('components.follow_group_button')
                 @else
-                    @include('components.unfollow_user_button')
+                    @include('components.create_wanted_button')
+                    @include('components.unfollow_group_button')
                 @endif
 
             </div>
@@ -28,7 +29,7 @@
 
 
         <p>
-        <h3 style="text-transform: uppercase">{{$board->name}}</h3>
+            <h3 style="text-transform: uppercase">{{$board->name}}</h3>
         </p>
     </div>
     <div class="container mb-4">
@@ -40,10 +41,10 @@
                 <div class="collapse navbar-collapse" id="navbarsExplore">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="{{ (strpos($currentRouteName, 'users.detail') !== false) ? 'active' : '' }} nav-link" href="{{route('users.detail',['username'=>$record->username])}}">Güncel Stickler</a>
+                            <a class="nav-link {{ (strpos($currentRouteName, 'groups.detail') !== false) ? 'active' : '' }}"  href="{{route('groups.detail',['group'=>$record->id])}}">Güncel Stickler</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ (strpos($currentRouteName, 'users.boards.index') !== false) ? 'active' : '' }}" href="{{route('users.boards.index',['username'=>$record->username])}}">Boardlar</a>
+                            <a class="nav-link {{ (strpos($currentRouteName, 'groups.boards.index') !== false) ? 'active' : '' }}"  href="{{route('groups.boards.index',['group'=>$record->id])}}">Boardlar</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -65,21 +66,30 @@
     <div class="container-fluid mb-5">
         <div class="row">
             <div class="card-columns">
+
                 @foreach($sticks as $stick)
                     @include('includes.stick')
                 @endforeach
+
             </div>
         </div>
     </div>
+
+
     @include('includes.user_photo_modal',[
-    'modal_id'=>'userPhoto',
-    'field'=>'main_image',
-    'route'=>$pageUrl.'.update_main_image',
+     'modal_id'=>'userPhoto',
+     'field'=>'image_path',
+     'route'=>$pageUrl.'.update_photo',
+     'id'=>['record'=>$record->id],
+     'photo_name'=>'image_url'
+     ])
+
+    @include('includes.create_stick',[
+    'modal_id'=>'createStick',
+    'boards'=>$record->boards,
+    'route'=>$pageUrl.'.create_stick',
     'id'=>['record'=>$record->id],
-    'photo_name'=>'main_image'
     ])
-
-
 @endsection
 @section('scripts')
     <script src="{{url('js/bootstrap-datepicker.js')}}"></script>
@@ -105,4 +115,5 @@
     </script>
 
 @endsection
+
 

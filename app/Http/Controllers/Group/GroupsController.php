@@ -231,4 +231,15 @@ class GroupsController extends BaseController{
         return view('sticks.detail',compact('stick'));
     }
 
+    public function boards_index(Group $group){
+        $record=$group;
+        $boards=$record->boards()->get();
+        return view('groups.boards_index',compact('boards','record'));
+    }
+
+    public function boards_detail($id, Board $board){
+        $record=Group::find($id);
+        $sticks=$board->sticks()->get();
+        return view('groups.boards_detail', compact('record','sticks','board') );
+    }
 }

@@ -5,7 +5,7 @@
             <div class="board-preview-row">
 
                 <div class="board-preview-cell">
-                    <img @if(count($board->sticks)>0) src="{{$board->sticks[0]->image_path}}" @endif >
+                    <img @if(count($board->sticks)>0) src="{{$board->sticks[0]->image_path}}"  @endif >
                 </div>
 
                 <div class="board-preview-cell">

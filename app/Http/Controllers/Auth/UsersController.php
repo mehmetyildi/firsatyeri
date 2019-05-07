@@ -188,6 +188,6 @@ class UsersController extends BaseController{
     public function boards_detail($id, Board $board){
         $record=User::find($id);
         $sticks=$board->sticks()->get();
-        return view('users.boards_detail', compact('record','sticks') );
+        return view('users.boards_detail', compact('record','sticks','board') );
     }
 }

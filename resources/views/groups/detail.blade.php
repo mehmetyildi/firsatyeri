@@ -41,10 +41,10 @@
                 <div class="collapse navbar-collapse" id="navbarsExplore">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Güncel Stickler</a>
+                            <a class="nav-link {{ (strpos($currentRouteName, 'groups.detail') !== false) ? 'active' : '' }}"  href="{{route('groups.detail',['id'=>$record->id])}}">Güncel Stickler</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Boardlar</a>
+                            <a class="nav-link {{ (strpos($currentRouteName, 'groups.boards.index') !== false) ? 'active' : '' }}"  href="{{route('groups.boards.index',['group'=>$record->id])}}">Boardlar</a>
                         </li>
 
                         <li class="nav-item dropdown">
