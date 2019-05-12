@@ -8,6 +8,7 @@
 namespace App\Models;
 use App\User;
 use App\Models\Group;
+use App\Models\Stick;
 
 
 use phpDocumentor\Reflection\Types\Array_;
@@ -31,6 +32,8 @@ class Wanted extends BaseModel
         ];
     }
 
+    protected $dates = ['deadline'];
+
     public static $fields = array('content');
     public static $image_fields = array();
     public static $imageFieldNames = array();
@@ -47,5 +50,9 @@ class Wanted extends BaseModel
 
     public function group(){
         return $this->BelongsTo(Group::class);
+    }
+
+    public function sticks(){
+        return $this->hasMany(Stick::class);
     }
 }

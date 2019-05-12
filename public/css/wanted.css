@@ -1,0 +1,68 @@
+body {
+    padding-top: 50px;
+}
+.carousel {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+}
+.carousel .card-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.carousel .card-carousel .my-card {
+    height: 10rem;
+    width: 10rem;
+    position: relative;
+    z-index: 1;
+    -webkit-transform: scale(0.6) translateY(-2rem);
+    transform: scale(0.6) translateY(-2rem);
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: none;
+    background: #c8cbcf;
+    background: linear-gradient(to top, #c6c8ca, #c8cbcf);
+    transition: 1s;
+    font-size:9pt;
+    padding: 10px;
+    border:solid 2px;
+    border-radius: 10px;
+}
+.carousel .card-carousel .my-card.active {
+    z-index: 3;
+    -webkit-transform: scale(1) translateY(0) translateX(0);
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    transition: 1s;
+}
+.answer{
+    visibility: hidden;
+}
+
+.my-card.active .answer {
+    visibility: visible;
+}
+.carousel .card-carousel .my-card.prev, .carousel .card-carousel .my-card.next {
+    z-index: 2;
+    opacity: 0.6;
+    pointer-events: auto;
+    transition: 1s;
+}
+.carousel .card-carousel .my-card.prev {
+    -webkit-transform: scale(0.8) translateY(-1rem) translateX(26rem);
+    transform: scale(0.8) translateY(-1rem) translateX(26rem);
+}
+.carousel .card-carousel .my-card.next {
+    -webkit-transform: scale(0.8) translateY(-1rem) translateX(-26rem);
+    transform: scale(0.8) translateY(-1rem) translateX(-26rem);
+}
+
+

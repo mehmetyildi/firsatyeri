@@ -10,6 +10,35 @@
                     <article class="card">
                         <img class="card-img-top mb-2" src="{{url('/storage/'.$stick->image_path)}}" onerror="this.src='{{$stick->image_path}}'" alt="Card image">
                         <div class="card-body">
+                            <div id="comments" class="mt-5">
+                            <li id="comment-2"
+                                class="comment even thread-even depth-1 parent media">
+                            <div class="media-body card mt-3 " id="div-comment-2">
+                                <div class="card-header hoverable">
+                                    <div class="flex-center">
+                                        <a href="{{route('users.detail',['username'=>$stick->creator->username])}}" class="media-object float-left">
+                                            <img alt=""
+                                                 onerror="this.src='{{$stick->creator->image_url}}'"
+                                                 src="{{url('/storage/'.$stick->creator->image_url)}}"
+                                                 class="avatar avatar-50 photo comment_avatar rounded-circle"
+                                                 height="50" width="50"></a>
+                                            <h4 class="media-heading ">{{$stick->creator->username}}</h4>
+                                    </div>
+                                    <div class="comment-metadata flex-center">
+                                        <a class="hidden-xs-down"
+                                           href="{{route('users.detail',['username'=>$stick->creator->username])}}">
+                                            <time
+                                                class=" small btn btn-secondary chip waves-effect waves-light"
+                                                datetime="{{$stick->created_at}}">
+                                                {{$stick->created_at->format('d/m/Y')}}
+                                            </time>
+                                        </a>
+
+                                    </div><!-- .comment-metadata -->
+                                </div>
+                            </div>
+                            </li>
+                            </div>
                             <h1 class="card-title display-4">
                                 {{$stick->name}} </h1>
                             <p>{!! $stick->content !!}</p>

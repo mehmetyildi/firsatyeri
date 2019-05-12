@@ -73,7 +73,7 @@ class Stick extends BaseModel{
     }
 
     public function creator(){
-        return $this->BelongsTo(User::class);
+        return $this->BelongsTo(User::class,'user_id');
     }
 
     public function group(){

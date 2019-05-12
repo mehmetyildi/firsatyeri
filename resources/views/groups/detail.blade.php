@@ -1,9 +1,12 @@
 @extends('layouts.app')
-
+@section('styles')
+    <link rel="stylesheet" href="{{url('css/wanted.css')}}">
+@endsection
 @section('content')
     <div class="profile-pic ">
         <img src="{{url('storage/'.$record->image_path)}}" onerror="this.src='{{$record->image_path}}'" alt="">
-        <div class="edit"><a data-toggle="modal" data-target="#userPhoto" href="#"><i class="fas fa-edit fa-lg"></i></a></div>
+        <div class="edit"><a data-toggle="modal" data-target="#userPhoto" href="#"><i class="fas fa-edit fa-lg"></i></a>
+        </div>
     </div>
     <div class="container mb-4">
         <div class="row" style="padding-top: 50px;">
@@ -27,28 +30,42 @@
         </div>
 
 
-
         <p>
             {{$record->description}}
         </p>
+
     </div>
+    <div class="col-md-12">
+        @if(count($record->wantedAds()->get())>0)
+            @include('includes.card-carousel')
+            <h4 style="text-align: center">Grup üyelerinden gelen istekler</h4>
+        @endif
+    </div>
+
+
+
     <div class="container mb-4">
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-white pl-2 pr-2">
-                <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExplore" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarsExplore" aria-controls="navbarsDefault" aria-expanded="false"
+                        aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarsExplore">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link {{ (strpos($currentRouteName, 'groups.detail') !== false) ? 'active' : '' }}"  href="{{route('groups.detail',['id'=>$record->id])}}">Güncel Stickler</a>
+                            <a class="nav-link {{ (strpos($currentRouteName, 'groups.detail') !== false) ? 'active' : '' }}"
+                               href="{{route('groups.detail',['id'=>$record->id])}}">Güncel Stickler</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ (strpos($currentRouteName, 'groups.boards.index') !== false) ? 'active' : '' }}"  href="{{route('groups.boards.index',['group'=>$record->id])}}">Boardlar</a>
+                            <a class="nav-link {{ (strpos($currentRouteName, 'groups.boards.index') !== false) ? 'active' : '' }}"
+                               href="{{route('groups.boards.index',['group'=>$record->id])}}">Boardlar</a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">İlgi Alanları</a>
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">İlgi Alanları</a>
                             <div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
                                 <a class="dropdown-item" href="#">Astronomy</a>
                                 <a class="dropdown-item" href="#">Nature</a>
@@ -93,8 +110,9 @@
 @endsection
 @section('scripts')
     <script src="{{url('js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{url('js/wanted.js')}}"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.input-group.date1').datepicker({
                 todayHighlight: true,
                 format: "dd/mm/yyyy",

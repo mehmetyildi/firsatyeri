@@ -84,16 +84,18 @@ class GroupsController extends BaseController{
     public function detail($id){
         $record=PageModel::find($id);
         $sticks=$record->sticks()->orderBy('created_at','desc')->get();
-        return view('groups/detail',compact('record','sticks'));
+        $wanteds=$record->wantedAds()->orderBy('created_at','desc')->get();
+        return view('groups/detail',compact('record','sticks','wanteds'));
     }
 
     public function create_stick($id){
         $group=Group::find($id);
         $parent=$group;
+        $child="";
         $boards=$group->boards()->get();
         $cities=City::all();
 
-        return view('groups.create_stick',compact('boards','cities','parent'));
+        return view('groups.create_stick',compact('boards','cities','parent','child'));
     }
 
     public function store_stick(Request $request,$id){
@@ -105,6 +107,7 @@ class GroupsController extends BaseController{
                 parent::handleDateInput($record, $request->get($dateField), $dateField);
             }
         }
+
         if($request->hasFile('image_path')){
 
             $imageField=$record::$imageFields[0];
@@ -123,8 +126,9 @@ class GroupsController extends BaseController{
             ,$record->image_path,$record->begin_date,$record->end_date
         );
         $stick->user_id=auth()->user()->id;
-        $board=$group->boards()->where('id', $request->board_id)->firstOrFail();
+        $board=$group->boards()->find($request->board_id);
         if($board!=null){
+
             $board->sticks()->save($stick);
         }
         else{
@@ -241,5 +245,60 @@ class GroupsController extends BaseController{
         $record=Group::find($id);
         $sticks=$board->sticks()->get();
         return view('groups.boards_detail', compact('record','sticks','board') );
+    }
+
+
+    public function create_wanted_stick(Group $group, Wanted $wanted){
+
+
+        $boards=$group->boards()->get();
+        $cities=City::all();
+
+        return view('groups.create_wanted_stick',compact('boards','cities','group','wanted'));
+    }
+
+    public function store_wanted_stick(Request $request,Group $group, Wanted $wanted){
+
+        $record=new Stick();
+        if($record::$dateFields){
+            foreach($record::$dateFields as $dateField){
+                parent::handleDateInput($record, $request->get($dateField), $dateField);
+            }
+        }
+
+        if($request->hasFile('image_path')){
+
+            $imageField=$record::$imageFields[0];
+            parent::handleImageUploadNoResize(
+                $record,
+                $imageField['naming'],
+                $imageField['diff'],
+                $request->file('image_path'),
+                $imageField['name']
+            );
+
+        }
+
+        $group->publishStick(
+            $stick=new Stick(request(['name','content','before_price','sale_price','city_id','district_id']))
+            ,$record->image_path,$record->begin_date,$record->end_date
+        );
+        $stick->user_id=auth()->user()->id;
+        $stick->wanted_id=$wanted->id;
+        $board=$group->boards()->find($request->board_id);
+        if($board!=null){
+            $board->sticks()->save($stick);
+        }
+        else{
+            $board_new=new Board;
+            $board_new->name=$request->board_id;
+            $group->boards()->save($board_new);
+            $board_new->sticks()->save($stick);
+        }
+        return redirect()->route($this->pageUrl.'.wanted.detail',['group'=>$group->id, 'wanted'=>$wanted->id]);
+    }
+
+    public function wanted_detail(Group $group, Wanted $wanted){
+        return view('groups.wanted_detail', compact('group','wanted'));
     }
 }
