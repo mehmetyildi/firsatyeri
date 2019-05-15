@@ -2,7 +2,7 @@
     <div class="card-carousel">
         @foreach($wanteds as $wanted)
             <div class="my-card">
-                <a href="{{route($pageUrl.'.wanted.detail',['wanted'=>$wanted->id, 'group'=>$record->id])}}">
+                <a class="wanted-link" href="{{route($pageUrl.'.wanted.detail',['wanted'=>$wanted->id, 'group'=>$record->id])}}">
                 <p>Son Tarih: {{$wanted->deadline->format('d/m/Y')}}</p>
                 <p>İstek: {{$wanted->content}}</p>
                 @if(count($wanted->sticks()->get())>0)

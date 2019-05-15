@@ -83,7 +83,7 @@ class GroupsController extends BaseController{
 
     public function detail($id){
         $record=PageModel::find($id);
-        $sticks=$record->sticks()->orderBy('created_at','desc')->get();
+        $sticks=Stick::filterForGroup($record);
         $wanteds=$record->wantedAds()->orderBy('created_at','desc')->get();
         return view('groups/detail',compact('record','sticks','wanteds'));
     }
@@ -231,8 +231,12 @@ class GroupsController extends BaseController{
     }
 
 
-    public function sticks_detail( Stick $stick){
-        return view('sticks.detail',compact('stick'));
+    public function sticks_detail(PageModel $record, Stick $stick ){
+        $boards=auth()->user()->boards()->get();
+        $owned_groups=auth()->user()->ownedGroups()->get();
+        $admin_of=auth()->user()->isAdminOf();
+        $groups=$owned_groups->toBase()->merge($admin_of);
+        return view('sticks.detail',compact('stick','record','boards','groups'));
     }
 
     public function boards_index(Group $group){
@@ -243,7 +247,7 @@ class GroupsController extends BaseController{
 
     public function boards_detail($id, Board $board){
         $record=Group::find($id);
-        $sticks=$board->sticks()->get();
+        $sticks=Stick::filterForBoard($board);
         return view('groups.boards_detail', compact('record','sticks','board') );
     }
 
@@ -301,4 +305,63 @@ class GroupsController extends BaseController{
     public function wanted_detail(Group $group, Wanted $wanted){
         return view('groups.wanted_detail', compact('group','wanted'));
     }
+
+    public function user_index(Group $group){
+        $record=$group;
+        $users=$group->users()
+           //->wherePivot('is_banned','=', false)
+            ->get();
+        return view('groups.users_index',compact('users','record'));
+    }
+
+    public function promote_user(Group $group, User $user){
+        $group->users()->updateExistingPivot($user, array('is_admin' => 1), false);
+        return redirect()->back();
+    }
+
+    public function depromote_user(Group $group, User $user){
+        $group->users()->updateExistingPivot($user, array('is_admin' => 0), false);
+        return redirect()->back();
+    }
+
+    public function ban_user(Group $group, User $user){
+        $group->users()->updateExistingPivot($user, array('is_banned' => 1), false);
+        return redirect()->back();
+    }
+
+    public function move_stick_to_board(User $user, Stick $stick,Request $request){
+        $new_board=Board::find($request->board_id);
+        if(!$new_board->saved_sticks()->get()->contains($stick)){
+            $new_board->saved_sticks()->attach($stick);
+
+        }
+        session()->flash('success', 'Stick sizin '.$new_board->name.' boardunuza taşındı');
+        return redirect()->back();
+    }
+
+    public function move_stick_to_group(User $user, Stick $stick,Request $request){
+        $old_group=$stick->group_id;
+        $group=Group::find($request->group_id);
+        $new_board=Board::find($request->board_id);
+        if($old_group==$request->group_id){
+            $group=Group::find($request->group_id);
+            $stick->board_id=$new_board->id;
+            $stick->group_id=$group->id;
+            $stick->save();
+            session()->flash('success', 'Stick '.$group->name.' adlı grubun '.$stick->board->name.' boarduna taşındı');
+        }
+        else{
+
+            if(!$new_board->saved_sticks()->get()->contains($stick)){
+                $new_board->saved_sticks()->attach($stick);
+
+            }
+
+        }
+        session()->flash('success', 'Stick '.$group->name.' adlı grubun '.$new_board->name.' boarduna kaydedildi');
+        return redirect()->back();
+    }
+
+
+
 }

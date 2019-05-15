@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\BaseController;
+use App\Models\Group;
 use App\User as PageModel;
 use App\User;
 use App\Models\City;
@@ -176,8 +177,12 @@ class UsersController extends BaseController{
         return redirect()->route($this->pageUrl.'.detail',['username'=>$user->username]);
     }
 
-    public function sticks_detail( Stick $stick){
-        return view('sticks.detail',compact('stick'));
+    public function sticks_detail(PageModel $record, Stick $stick ){
+        $boards=$record->boards()->get();
+        $owned_groups=$record->ownedGroups()->get();
+        $admin_of=$record->isAdminOf();
+        $groups=$owned_groups->toBase()->merge($admin_of);
+        return view('sticks.detail',compact('stick','record','boards','groups'));
     }
 
     public function boards_index($username){
@@ -188,7 +193,59 @@ class UsersController extends BaseController{
 
     public function boards_detail($id, Board $board){
         $record=User::find($id);
-        $sticks=$board->sticks()->get();
+        $sticks=Stick::filterForBoard($board);
         return view('users.boards_detail', compact('record','sticks','board') );
     }
+
+    public function move_stick_to_board(User $user, Stick $stick, Request $request){
+
+       $new_board=Board::find($request->board_id);
+       $stick->board_id=$new_board->id;
+       $stick->save();
+       session()->flash('success', 'Stick sizin '.$new_board->name.' boardunuza taşındı');
+       return redirect()->back();
+    }
+
+    public function move_stick_to_group(User $user, Stick $stick,Request $request){
+        $new_board=Board::find($request->board_id);
+        $group=Group::find($request->group_id);
+        if(!$new_board->saved_sticks()->get()->contains($stick)){
+            $new_board->saved_sticks()->attach($stick);
+
+        }
+        $stick->save();
+        session()->flash('success', 'Stick '.$group->name.'adlı grubun '.$new_board->name.' boarduna kaydedildi');
+        return redirect()->back();
+    }
+
+    public function save_stick(Request $request,User $user, Stick $stick){
+        $board=Board::find($request->board_id);
+        if(!$board->saved_sticks()->get()->contains($stick)){
+            $board->saved_sticks()->attach($stick);
+
+        }
+        session()->flash('success', 'Stick sizin '.$board->name.' boardunuza kaydedildi');
+        return redirect()->back();
+    }
+
+    public function interests(User $user){
+        $interests=Interest::all();
+        return view('users.interests',compact('user','interests'));
+    }
+
+    public function interests_store(Request $request, User $user){
+        $user->interests()->sync($request->interests);
+        return redirect()->route('users.edit',['id'=>$user->id]);
+    }
+
+    public function interests_edit(User $user){
+        $interests=Interest::all();
+        return view('users.interests_edit',compact('interests','user'));
+    }
+
+    public function interests_update(Request $request, User $user){
+        $user->interests()->sync($request->interests);
+        return redirect()->route('users.edit',['id'=>$user->id]);
+    }
+
 }

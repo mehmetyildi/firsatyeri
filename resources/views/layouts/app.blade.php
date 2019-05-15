@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url('css/bootstrap.bundle.min.css')}}">
+    <link href="{{ url('css/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{url('css/master.css')}}">
     <link rel="stylesheet" href="{{url('css/theme.css')}}">
     <link rel="stylesheet" href="{{url('css/comment.css')}}">
@@ -33,11 +34,22 @@
 
 </div>
 <script src="{{url('js/jquery-3.3.1.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="{{ url('js/toastr.min.js') }}"></script>
 <script src="{{url('js/comment.js')}}"></script>
+@if(Session::has('success') || Session::has('danger'))
+    <script>
+        @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+        @elseif(Session::has('danger'))
+        toastr.error("{{ Session::get('danger') }}");
+        @endif
+    </script>
+@endif
 @yield('scripts')
 </body>
 </html>

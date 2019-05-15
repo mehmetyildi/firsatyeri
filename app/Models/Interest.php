@@ -15,10 +15,10 @@ use phpDocumentor\Reflection\Types\Array_;
 class Interest extends BaseModel{
     protected $table='interests';
     protected $fillable=['name','image_path'];
-    protected $rules=array(
+    public static $rules=array(
         'name'=>'required'
     );
-    protected $updaterules=array(
+    public static $updaterules=array(
         'name'=>'required',
     );
     public static function messages(){
@@ -28,7 +28,7 @@ class Interest extends BaseModel{
     }
     public static $fields=array('name');
     public static $image_fields=array(
-        ["name" => "image_path", "width" => 200, "height" => 200, 'crop' => true, 'naming' => 'name', 'diff' => 'image_path']
+        ["name" => "image_path", "width" => 150, "height" => 150, 'crop' => true, 'naming' => 'name', 'diff' => 'image_path']
     );
     public static $imageFieldNames = array(
         "image_path"

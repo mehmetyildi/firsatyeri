@@ -178,6 +178,7 @@ class GeneralDatabaseTables extends Migration
             $table->integer('group_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->boolean('is_admin')->default(false);//to resolve wanted ads.
+            $table->boolean('is_banned')->default(false);
             $table->nullableTimestamps();
 
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');

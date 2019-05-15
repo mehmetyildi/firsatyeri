@@ -57,6 +57,18 @@ class Board extends BaseModel{
         return $this->belongsToMany(Interest::class);
     }
 
+    public function randomStick(){
+        $saved=$this->saved_sticks()
+            ->where('end_date','>=',todayWithFormat('Y-m-d'))
+            ->inRandomOrder()->get();
+        $owned=$this->sticks()
+            ->where('end_date','>=',todayWithFormat('Y-m-d'))
+            ->inRandomOrder()->get();
+        $sticks=$saved->toBase()->merge($owned);
+        return $sticks;
+
+    }
+
 
 }
 

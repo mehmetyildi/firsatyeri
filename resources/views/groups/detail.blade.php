@@ -5,8 +5,10 @@
 @section('content')
     <div class="profile-pic ">
         <img src="{{url('storage/'.$record->image_path)}}" onerror="this.src='{{$record->image_path}}'" alt="">
-        <div class="edit"><a data-toggle="modal" data-target="#userPhoto" href="#"><i class="fas fa-edit fa-lg"></i></a>
-        </div>
+        @if(Auth::user()->username==$record->creator->username)
+            <div class="edit"><a data-toggle="modal" data-target="#userPhoto" href="#"><i class="fas fa-edit fa-lg"></i></a>
+            </div>
+        @endif
     </div>
     <div class="container mb-4">
         <div class="row" style="padding-top: 50px;">
@@ -14,7 +16,7 @@
                 <h1 class="font-weight-bold title">{{$record->username}}</h1>
             </div>
             <div class="col">
-                @if(Auth::user()->isOwnerOf($record))
+                @if(Auth::user()->isOwnerOf($record)|| Auth::user()->isAdmin($record))
                     @include('components.edit_button')
                     @include('components.create_stick_button')
                     @include('components.create_board_button')
@@ -62,7 +64,12 @@
                             <a class="nav-link {{ (strpos($currentRouteName, 'groups.boards.index') !== false) ? 'active' : '' }}"
                                href="{{route('groups.boards.index',['group'=>$record->id])}}">Boardlar</a>
                         </li>
-
+                        @if($record->creator->username==Auth::user()->username)
+                            <li class="nav-item">
+                                <a class="nav-link {{ (strpos($currentRouteName, 'groups.users.index') !== false) ? 'active' : '' }}"
+                                   href="{{route('groups.users.index',['group'=>$record->id])}}">Kullanıcılar</a>
+                            </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">İlgi Alanları</a>

@@ -65,11 +65,11 @@ class Group extends BaseModel{
     }
 
     public function users(){
-        return $this->BelongsToMany(User::class);
+        return $this->BelongsToMany(User::class)->withPivot(['is_admin','is_banned']);
     }
 
     public function creator(){
-        return $this->BelongsTo(User::class);
+        return $this->BelongsTo(User::class,'user_id');
     }
 
     public function sticks(){
@@ -78,6 +78,10 @@ class Group extends BaseModel{
 
     public function wantedAds(){
         return $this->HasMany(Wanted::class);
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class);
     }
 
     public function publishStick(Stick $stick, $image_path,$begin,$end){

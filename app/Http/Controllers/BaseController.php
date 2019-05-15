@@ -341,9 +341,7 @@ class BaseController extends Controller
                 }
             }
             $record->delete();
-            if($record->$urlColumn){
-            	SearchIndex::where('keyword', $record->$urlColumn)->first()->delete();
-            }
+
             return true;
         }
 

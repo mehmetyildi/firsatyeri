@@ -1,25 +1,31 @@
 <?php
+
 namespace App\Http\Controllers\Stick;
+
 use App\Models\Comment;
 use App\Models\Stick as PageModel;
 use App\Models\City;
 use App\Models\District;
 use App\Models\Board;
 use App\Models\Stick;
+use App\User;
 use View;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 
-class SticksController extends BaseController{
+class SticksController extends BaseController
+{
 
     public function __construct(PageModel $model)
     {
         $this->middleware('auth');
-        $this->pageUrl='sticks';
+        $this->pageUrl = 'sticks';
         $this->pageName = 'Stickler';
         $this->pageItem = 'Stick';
+        $this->urlColumn = 'name';
         $this->model = $model;
         $this->fields = $model::$fields;
         $this->imageFields = $model::$imageFields;
@@ -34,32 +40,34 @@ class SticksController extends BaseController{
         ));
     }
 
-    public function create(){
-        $boards=Auth::user()->boards()->get();
-        $cities=City::all();
+    public function create()
+    {
+        $boards = Auth::user()->boards()->get();
+        $cities = City::all();
 
-        return view('sticks.create',compact('boards','cities'));
+        return view('sticks.create', compact('boards', 'cities'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         //$this->validate($request, PageModel::$rules,PageModel::messages());
         $record = new PageModel;
 
         /** Regular Inputs **/
-        foreach($this->fields as $field){
+        foreach ($this->fields as $field) {
             $record->$field = $request->get($field);
         }
         /** Date Inputs **/
-        if($this->dateFields){
-            foreach($this->dateFields as $dateField){
+        if ($this->dateFields) {
+            foreach ($this->dateFields as $dateField) {
                 parent::handleDateInput($record, $request->get($dateField), $dateField);
             }
         }
 
         /** Image Inputs **/
-        if($request->hasFile('image_path')){
+        if ($request->hasFile('image_path')) {
 
-            $imageField=$this->imageFields[0];
+            $imageField = $this->imageFields[0];
             parent::handleImageUploadNoResize(
                 $record,
                 $imageField['naming'],
@@ -69,31 +77,105 @@ class SticksController extends BaseController{
             );
 
         }
-        $record->user_id=Auth::user()->id;
+        $record->user_id = Auth::user()->id;
 
-        $board=Auth::user()->boards()->find($record->board_id);
-        if($board!=null){
+        $board = Auth::user()->boards()->find($record->board_id);
+        if ($board != null) {
             $board->sticks()->save($record);
             $record->boards()->attach($board);
 
-        }
-        else{
-            $board_new=new Board;
-            $board_new->name=$request->board_id;
+        } else {
+            $board_new = new Board;
+            $board_new->name = $request->board_id;
             Auth::user()->boards()->save($board_new);
             $board_new->sticks()->save($record);
         }
 
 
-        session()->flash('success', 'Yeni '.$this->pageItem.' oluşturuldu.');
-        return redirect()->route('users.index',Auth::user()->username);
+        session()->flash('success', 'Yeni ' . $this->pageItem . ' oluşturuldu.');
+        return redirect()->route('users.index', Auth::user()->username);
     }
 
-    public function create_comment(Request $request, Stick $stick){
+    public function create_comment(Request $request, Stick $stick)
+    {
 
         Auth::user()->publishComment(
-            $comment=new Comment(request(['content'])),$stick->id
+            $comment = new Comment(request(['content'])), $stick->id
         );
         return redirect()->back();
     }
+
+    public function edit(Stick $stick)
+    {
+        if (count($stick->group()->get()) == 0) {
+            $boards = Auth::user()->boards()->get();
+        } else {
+            $boards = $stick->group->boards()->get();
+        }
+        $districts = $stick->city->districts()->get();
+        $cities = City::all();
+        return view('sticks.edit', compact('stick', 'cities', 'boards', 'districts'));
+    }
+
+    public function update(Request $request, Stick $stick)
+    {
+
+        /** Regular Inputs **/
+        foreach ($this->fields as $field) {
+            $stick->$field = $request->get($field);
+        }
+        /** Date Inputs **/
+        if ($this->dateFields) {
+            foreach ($this->dateFields as $dateField) {
+                parent::handleDateInput($stick, $request->get($dateField), $dateField);
+            }
+        }
+
+        $stick->save();
+        session()->flash('success', 'Yeni ' . $this->pageItem . ' güncellendi.');
+        return redirect()->route('sticks.detail', $stick->id);
+    }
+
+    public function update_photo(Request $request, Stick $stick)
+    {
+
+        if ($request->hasFile('image_path')) {
+            $imageField = $this->imageFields[0];
+            parent::handleImageUploadNoResize(
+                $stick,
+                $imageField['naming'],
+                $imageField['diff'],
+                $request->file('image_path'),
+                $imageField['name']
+            );
+
+            $stick->save();
+            return redirect()->back();
+        }
+
+    }
+
+    public function detail(Stick $stick)
+    {
+        return view('sticks.detail', compact('stick'));
+    }
+
+    public function delete(Request $request, Stick $stick)
+    {
+        if ($request->return_url == "users") {
+            $id = User::find($request->parent_id)->username;
+        } else {
+            $id = $request->parent_id;
+        }
+        if (parent::handleDestroy($this->model, $stick, $this->urlColumn, true, true)) {
+            session()->flash('success', $this->pageItem . ' silindi.');
+        } else {
+            session()->flash('danger', 'Böyle bir kayıt yok.');
+        }
+
+        return redirect()->route($request->return_url . '.detail', ['record' => $id]);
+
+    }
+
+
 }

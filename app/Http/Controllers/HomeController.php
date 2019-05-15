@@ -6,6 +6,7 @@
  * Time: 08:58
  */
 namespace App\Http\Controllers;
+use App\Models\Interest;
 use App\User as PageModel;
 
 use View;
@@ -35,8 +36,12 @@ class HomeController extends Controller{
     }
 
     public function home(){
+        if(count(auth()->user()->interests()->get())==0){
+            return redirect()->route('users.interests',['user'=>auth()->user()->id]);
+        }
         $sticks=Stick::
         orderBy('created_at','desc')->take(50)->get();
-        return view('home', compact('sticks'));
+        $record=auth()->user();
+        return view('home', compact('sticks','record'));
     }
 }

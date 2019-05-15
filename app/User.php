@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Board;
+use App\Models\Role;
 use App\Models\Interest;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -83,6 +84,10 @@ class User extends Authenticatable
 
     public function sticks(){
         return $this->BelongsToMany(Stick::class);
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
     }
 
     public function publishedSticks(){
@@ -181,5 +186,16 @@ class User extends Authenticatable
 
     public function interests(){
         return $this->belongsToMany(Interest::class);
+    }
+
+    public function isBanned(Group $group){
+        return $group->users()->where('user_id',$this->id)->first()->pivot->is_banned;
+    }
+
+    public function isAdmin(Group $group){
+        if($this->isOwnerOf($group)){
+            return false;
+        }
+        return $group->users()->where('user_id',$this->id)->first()->pivot->is_admin;
     }
 }

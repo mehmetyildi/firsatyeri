@@ -41,7 +41,8 @@ class DummyDataSeeder extends Seeder
                 'email' => $faker->unique()->safeEmail,
                 'password'=>'12345678',
                 'image_url'=>$faker->imageUrl(200, 200, 'people', true, 'Faker'),
-                'main_image'=>$faker->imageUrl(1200, 400, 'people', true, 'Faker')
+                'main_image'=>$faker->imageUrl(1200, 400, 'people', true, 'Faker'),
+                'role_id'=>2,
             ]);
             $user->interests()->attach(Interest::all()->random(3));
             for($j=0;$j<$faker->numberBetween($min = 1, $max = 10);$j++){

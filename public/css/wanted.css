@@ -47,8 +47,18 @@ body {
     visibility: hidden;
 }
 
+.wanted-link {
+    pointer-events: none;
+    cursor: default;
+
+}
 .my-card.active .answer {
     visibility: visible;
+}
+
+.my-card.active .wanted-link {
+    pointer-events: initial;
+    cursor: pointer;
 }
 .carousel .card-carousel .my-card.prev, .carousel .card-carousel .my-card.next {
     z-index: 2;

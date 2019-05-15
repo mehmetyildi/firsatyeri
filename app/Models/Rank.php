@@ -11,11 +11,11 @@ use App\User;
 class Rank extends BaseModel{
     protected $table='ranks';
     protected $fillable=['name','order'];
-    protected $rules=array(
+    public static $rules=array(
         'name'=>'required',
         'order'=>'required',
     );
-    protected $updaterules=array(
+    public static $updaterules=array(
         'name'=>'required',
         'order'=>'required',
     );
@@ -27,6 +27,10 @@ class Rank extends BaseModel{
     }
     public static $fields=array('name','order');
     public static $image_fields=array(
+
+    );
+
+    public static $imageFieldNames = array(
 
     );
     public static $docFields = array(

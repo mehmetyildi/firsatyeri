@@ -13,17 +13,21 @@
         </ul>
         <ul class="navbar-nav ml-auto align-items-center">
             <li class="nav-item">
-                <a class="nav-link active" href="{{route('home')}}">Anasayfam</a>
+                <a class="nav-link {{ (strpos($currentRouteName, 'home') !== false) ? 'active' : '' }}" href="{{route('home')}}">Anasayfam</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('users.sticks.create',['id'=>Auth::user()->id])}}">Stick</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('groups.index',['username'=>Auth::user()->username])}}">Gruplar</a>
+                <a class="nav-link {{ (strpos($currentRouteName, 'interests') !== false) ? 'active' : '' }}" href="{{route('users.interests.edit',['user'=>Auth::user()->id])}}"><span class="align-middle">İlgi Alanlarım</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('users.detail',['username'=>Auth::user()->username])}}"><img class="rounded-circle mr-2" src="{{url('storage/'.Auth::user()->image_url)}}" onerror="this.src='{{Auth::user()->image_url}}'" width="30"><span class="align-middle">{{Auth::user()->username}}</span></a>
+                <a class="nav-link {{ (strpos($currentRouteName, 'sticks.create') !== false) ? 'active' : '' }}" href="{{route('users.sticks.create',['id'=>Auth::user()->id])}}">Stick</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ (strpos($currentRouteName, 'groups') !== false) ? 'active' : '' }}" href="{{route('groups.index',['username'=>Auth::user()->username])}}">Gruplar</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ (strpos($currentRouteName, 'users') !== false) ? 'active' : '' }}" href="{{route('users.detail',['username'=>Auth::user()->username])}}"><img class="rounded-circle mr-2" src="{{url('storage/'.Auth::user()->image_url)}}" onerror="this.src='{{Auth::user()->image_url}}'" width="30"><span class="align-middle">{{Auth::user()->username}}</span></a>
             </li>
 
         </ul>

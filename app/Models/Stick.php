@@ -38,7 +38,7 @@ class Stick extends BaseModel{
             'altitude.required'=>'The location can not be empty',
         ];
     }
-    public static $fields=array('name','content','latitude','altitude','city_id', 'district_id','before_price','sale_price','user_id');
+    public static $fields=array('name','content','latitude','altitude','city_id', 'district_id','before_price','sale_price');
     public static $imageFields=array(
         ["name" => "image_path",  'crop' => true, 'naming' => 'name', 'diff' => 'image_path']
 
@@ -68,6 +68,10 @@ class Stick extends BaseModel{
         return $this->BelongsToMany(Board::class);
     }
 
+    public function board(){
+        return $this->belongsTo(Board::class);
+    }
+
     public function users(){
         return $this->BelongsToMany(User::class);
     }
@@ -94,6 +98,35 @@ class Stick extends BaseModel{
 
     public static function filterForUser($username){
         $user=User::where('username',$username)->firstOrFail();
-        return Stick::where('user_id',$user->id)->get();
+        return $user->publishedSticks()->whereNull('group_id')->get();
+    }
+
+    public static function filterForBoard(Board $board){
+       $owned_sticks=$board->sticks()
+           ->where('end_date','>=',todayWithFormat('Y-m-d'))
+           ->get()
+       ;
+       $saved_sticks=$board->saved_sticks()
+           ->where('end_date','>=',todayWithFormat('Y-m-d'))
+           ->get();
+       $sticks=$owned_sticks->toBase()->merge($saved_sticks);
+       return $sticks;
+    }
+
+
+
+    public static function filterForGroup(Group $group){
+        $owned=$group->sticks()
+            ->where('end_date','>=',todayWithFormat('Y-m-d'))
+            //->where('begin_date','>=',todayWithFormat('Y-m-d'))
+            ->get();
+        $sticks=$owned;
+        foreach ($group->boards as $board){
+            $board_sticks=$board->saved_sticks()->where('end_date','>=',todayWithFormat('Y-m-d'))
+                //->where('begin_date','<=',todayWithFormat('Y-m-d'))
+                ->get();
+            $sticks=$sticks->toBase()->merge($board_sticks);
+        }
+        return $sticks;
     }
 }
