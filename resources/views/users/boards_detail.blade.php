@@ -27,9 +27,13 @@
 
 
 
-        <p>
         <h3 style="text-transform: uppercase">{{$board->name}}</h3>
-        </p>
+        @foreach($board->interests as $interest)
+            {{$interest->name}},
+        @endforeach
+        @if(auth()->user()->username==$board->boardable->username)
+        <a href="{{route($pageUrl.'.boards.edit',['record'=>$record->id,'board'=>$board->id])}}" class="btn btn-sm btn-gray200">Düzenle</a>
+        @endif
     </div>
     <div class="container mb-4">
         <div class="row">

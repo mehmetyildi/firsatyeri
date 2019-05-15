@@ -198,4 +198,7 @@ class User extends Authenticatable
         }
         return $group->users()->where('user_id',$this->id)->first()->pivot->is_admin;
     }
+
+
+
 }

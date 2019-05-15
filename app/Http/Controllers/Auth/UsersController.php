@@ -248,4 +248,21 @@ class UsersController extends BaseController{
         return redirect()->route('users.edit',['id'=>$user->id]);
     }
 
+    public function edit_board(User $record, Board $board){
+        $interests=Interest::all();
+        return view('boards.edit',compact('interests','board','record'));
+    }
+
+    public function update_board(Request $request, User $record, Board $board){
+
+        $board->name=$request->name;
+        $board->description=$request->description;
+        $board->save();
+        $board->interests()->sync($request->interests);
+        foreach ($board->sticks as $stick){
+            $stick->interests()->sync($board->interests()->get());
+        }
+        return redirect()->route($this->pageUrl.'.board.detail',['id'=>$record->id,'board'=>$board->id]);
+    }
+
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Factory;
 use App\User;
@@ -112,6 +113,31 @@ class DummyDataSeeder extends Seeder
                 $board->interests()->attach(Interest::all()->random(3));
             }
         }
+
+        $role1=new Role();
+        $role1->name='Member';
+        $role1->save();
+        $role2=new Role();
+        $role2->name='Admin';
+        $role2->save();
+
+        $rank1=new Rank();
+        $rank1->name='Ölücü';
+        $rank1->order=1;
+        $rank2=new Rank();
+        $rank2->name='Cebinde Akrep Var';
+        $rank2->order=2;
+        $rank3=new Rank();
+        $rank3->name='Pazar Müdavimi';
+        $rank3->order=3;
+        $rank4=new Rank();
+        $rank4->name='Sıkı Pazarlıkçı';
+        $rank4->order=4;
+        $rank5=new Rank();
+        $rank5->name='Buralarda Yeni';
+        $rank5->order=5;
+
+
 
 
     }

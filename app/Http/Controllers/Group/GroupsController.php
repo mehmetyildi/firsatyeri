@@ -130,6 +130,7 @@ class GroupsController extends BaseController{
         if($board!=null){
 
             $board->sticks()->save($stick);
+            $stick->interests()->sync($board->interests()->get());
         }
         else{
             $board_new=new Board;
@@ -143,6 +144,23 @@ class GroupsController extends BaseController{
     public function create_board($id){
         $interests=Interest::all();
         return view('boards.create',compact('interests','id'));
+    }
+
+    public function edit_board(Group $record, Board $board){
+        $interests=Interest::all();
+        return view('boards.edit',compact('interests','board','record'));
+    }
+
+    public function update_board(Request $request, Group $record, Board $board){
+
+        $board->name=$request->name;
+        $board->description=$request->description;
+        $board->save();
+        $board->interests()->sync($request->interests);
+        foreach ($board->sticks as $stick){
+            $stick->interests()->sync($board->interests()->get());
+        }
+        return redirect()->route($this->pageUrl.'.board.detail',['id'=>$record->id,'board'=>$board->id]);
     }
 
     public function store_board(Request $request, $id){

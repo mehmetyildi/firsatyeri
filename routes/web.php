@@ -45,7 +45,8 @@ Route::middleware('auth')->group(function (){
             Route::name('interests.store')->post('/interests/{user}','UsersController@interests_store');
             Route::name('interests.edit')->get('/interests/{user}/edit','UsersController@interests_edit');
             Route::name('interests.update')->post('/interests/{user}/update','UsersController@interests_update');
-
+            Route::name('boards.edit')->get('{record}/boards/{board}/edit','UsersController@edit_board');
+            Route::name('boards.update')->post('{record}/boards/update/{board}','UsersController@update_board');
 
         }
     );
@@ -72,6 +73,8 @@ Route::middleware('auth')->group(function (){
             Route::name('follow')->get('/follow/{group}','GroupsController@follow');
             Route::name('unfollow')->get('/unfollow/{group}','GroupsController@unfollow');
             Route::name('boards.create')->get('/boards/{id}/create','GroupsController@create_board');
+            Route::name('boards.edit')->get('{record}/boards/{board}/edit','GroupsController@edit_board');
+            Route::name('boards.update')->post('{record}/boards/update/{board}','GroupsController@update_board');
             Route::name('boards.store')->post('/boards/store/{id}','GroupsController@store_board');
             Route::name('edit')->get('/edit/{group}','GroupsController@edit');
             Route::name('update')->post('/update/{group}','GroupsController@update');

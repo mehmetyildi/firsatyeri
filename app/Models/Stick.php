@@ -61,7 +61,7 @@ class Stick extends BaseModel{
     );
 
     public function interests(){
-        return $this->BelongsToMany(Interest::class);
+        return $this->BelongsToMany(Interest::class,'stick_interest','stick_id','interest_id');
     }
 
     public function boards(){
@@ -129,4 +129,6 @@ class Stick extends BaseModel{
         }
         return $sticks;
     }
+
+    
 }
