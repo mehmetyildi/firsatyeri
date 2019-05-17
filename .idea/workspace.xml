@@ -2,51 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="619a2f04-32a8-4538-ae5c-10a1b629c21e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Group/GroupsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Group/GroupsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Stick/SticksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Stick/SticksController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Board.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Board.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Group.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Stick.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Stick.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Wanted.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Wanted.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DummyDataSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DummyDataSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/boards/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/boards/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/boards/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/boards/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/create_board_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/create_board_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/create_stick_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/create_stick_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/create_wanted_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/create_wanted_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/edit_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/edit_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/edit_stick_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/edit_stick_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/follow_group_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/follow_group_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/follow_user_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/follow_user_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/stick_delete_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/stick_delete_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/unfollow_group_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/unfollow_group_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/unfollow_user_button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/unfollow_user_button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/boards_detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/boards_detail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/create_stick.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/create_stick.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/create_wanted_stick.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/create_wanted_stick.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/detail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/users_index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/users_index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/wanted_detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/wanted_detail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/card-carousel.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/card-carousel.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/_navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/_navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sticks/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sticks/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sticks/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sticks/detail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sticks/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sticks/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/create_stick.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/create_stick.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/wanteds/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/wanteds/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -127,14 +83,14 @@
           <entry key="env" value="17" />
           <entry key="js" value="145" />
           <entry key="json" value="6" />
-          <entry key="php" value="50277" />
+          <entry key="php" value="50305" />
           <entry key="scss" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="17" />
-          <entry key="Blade" value="19254" />
+          <entry key="Blade" value="19282" />
           <entry key="CSS" value="630" />
           <entry key="JSON" value="6" />
           <entry key="JavaScript" value="145" />
@@ -218,8 +174,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/auth/login.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="47" column="89" selection-start-line="47" selection-start-column="89" selection-end-line="47" selection-end-column="89" />
+            <state relative-caret-position="119">
+              <caret line="16" column="95" selection-start-line="16" selection-start-column="95" selection-end-line="16" selection-end-column="95" />
+              <folding>
+                <element signature="e#592#655#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -658,12 +617,12 @@
       <workItem from="1557294525975" duration="34000" />
       <workItem from="1557402158633" duration="12479000" />
       <workItem from="1557671840235" duration="71697000" />
-      <workItem from="1557986641886" duration="42383000" />
+      <workItem from="1557986641886" duration="43164000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323638000" />
+    <option name="totallyTimeSpent" value="324419000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1084,8 +1043,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/auth/login.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="47" column="89" selection-start-line="47" selection-start-column="89" selection-end-line="47" selection-end-column="89" />
+        <state relative-caret-position="119">
+          <caret line="16" column="95" selection-start-line="16" selection-start-column="95" selection-end-line="16" selection-end-column="95" />
+          <folding>
+            <element signature="e#592#655#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

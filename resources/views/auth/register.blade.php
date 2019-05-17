@@ -8,13 +8,13 @@
 @section('content')
     <div class="container-fluid">
         <div class="row no-gutter">
-            <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image" style="max-height: 750px;">
+            <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image" style="max-height: 750px; ">
             </div>
             <div class="col-md-8 col-lg-6">
                 <div class="login d-flex align-items-center py-5">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-9 col-lg-8 mx-auto">
+                            <div style="background: #beebff ; border-radius: 5px;" class="col-md-9 col-lg-8 mx-auto">
                                 <h3 class="login-heading mb-4">Firsatyeri'ne Hoşgeldiniz!</h3>
                                 <form method="POST" action="{{ route('register') }}">
                                     {{ csrf_field() }}
@@ -66,8 +66,6 @@
                                         class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
                                         type="submit">Giriş
                                     </button>
-                                    <div class="text-center">
-                                        <a class="small" href="#">Şifremi unuttum</a></div>
                                 </form>
                             </div>
                         </div>

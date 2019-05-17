@@ -14,7 +14,7 @@
                 <div class="login d-flex align-items-center py-5">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-9 col-lg-8 mx-auto">
+                            <div style="background: #beebff ; border-radius: 5px;" class="col-md-9 col-lg-8 mx-auto">
                                 <h3 class="login-heading mb-4">Firsatyeri'ne Hoşgeldiniz!</h3>
                                 <form method="POST" action="{{route('login')}}">
                                     {{ csrf_field() }}
