@@ -13,7 +13,7 @@
 
                 <div class="form-label-group ">
                     <label for="name" class=" control-label">İçerik</label>
-                    <textarea name="content" class="form-control" id="" cols="30" rows="3"></textarea>
+                    <textarea name="content"  class="form-control" id="" cols="30" rows="3">{{ old('content')}}</textarea>
                 </div>
                 <div class="error" style="color: red;">{{ $errors->first('content') }}</div>
 
@@ -21,7 +21,7 @@
                     <label class="control-label">Bitiş</label>
                     <div class="input-group date date1">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input type="text" class="form-control" name="deadline" autocomplete="off">
+                        <input type="text" value="{{ old('deadline')}}" class="form-control" name="deadline" autocomplete="off">
                     </div>
                 </div>
 

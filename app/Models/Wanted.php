@@ -17,11 +17,11 @@ class Wanted extends BaseModel
 {
     protected $table = 'wanted';
     protected $fillable = ['content','deadline','isResolved','user_id','group_id'];
-    protected $rules = array(
+    public static $rules = array(
         'content' => 'required',
 
     );
-    protected $updaterules = array(
+    public static $updaterules = array(
         'content' => 'required',
     );
 

@@ -19,6 +19,8 @@
                 @if(Auth::user()->isOwnerOf($record)|| Auth::user()->isAdmin($record))
                     @include('components.edit_button')
                     @include('components.create_board_button')
+                    @include('components.create_stick_button')
+                    @include('components.create_wanted_button')
 
                 @elseif(Auth::user()->isMemberOfThis($record))
 

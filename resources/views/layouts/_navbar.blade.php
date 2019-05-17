@@ -18,10 +18,11 @@
             <li class="nav-item">
                 <a class="nav-link {{ (strpos($currentRouteName, 'interests') !== false) ? 'active' : '' }}" href="{{route('users.interests.edit',['user'=>Auth::user()->id])}}"><span class="align-middle">İlgi Alanlarım</span></a>
             </li>
-
+            @if(strpos($currentRouteName,'home')!==false)
             <li class="nav-item">
                 <a class="nav-link {{ (strpos($currentRouteName, 'sticks.create') !== false) ? 'active' : '' }}" href="{{route('users.sticks.create',['id'=>Auth::user()->id])}}">Stick</a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link {{ (strpos($currentRouteName, 'groups') !== false) ? 'active' : '' }}" href="{{route('groups.index',['username'=>Auth::user()->username])}}">Gruplar</a>
             </li>

@@ -25,12 +25,12 @@
 
                         <div class="form-label-group ">
                             <label for="name" class=" control-label">Board Adı</label>
-                            <input type="text" class="form-control" name="name"/>
+                            <input type="text" value="{{ old('name')}}" class="form-control" name="name"/>
                         </div>
                 <div class="error" style="color: red;">{{ $errors->first('name') }}</div>
                         <div class="form-label-group">
                             <label for="about" class=" control-label">Kısa tanım</label>
-                            <textarea class="form-control" rows="3" name="description"></textarea>
+                            <textarea class="form-control" rows="3" name="description"> {{old('description')}}</textarea>
                         </div>
 
 

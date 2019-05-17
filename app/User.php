@@ -52,8 +52,8 @@ class User extends Authenticatable
 
     );
     public static $updaterules = array(
-        'username' => 'required|unique:users',
-        'email'=>'required|unique:users',
+        'username' => 'required',
+        'email'=>'required',
 
     );
 
