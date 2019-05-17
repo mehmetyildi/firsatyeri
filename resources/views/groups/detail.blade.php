@@ -18,14 +18,15 @@
             <div class="col">
                 @if(Auth::user()->isOwnerOf($record)|| Auth::user()->isAdmin($record))
                     @include('components.edit_button')
-                    @include('components.create_stick_button')
                     @include('components.create_board_button')
-                    @include('components.create_wanted_button')
-                @elseif(!Auth::user()->isMemberOfThis($record))
-                    @include('components.follow_group_button')
-                @else
+
+                @elseif(Auth::user()->isMemberOfThis($record))
+
+                    @include('components.create_stick_button')
                     @include('components.create_wanted_button')
                     @include('components.unfollow_group_button')
+                @else
+                    @include('components.follow_group_button')
                 @endif
 
             </div>
@@ -64,24 +65,12 @@
                             <a class="nav-link {{ (strpos($currentRouteName, 'groups.boards.index') !== false) ? 'active' : '' }}"
                                href="{{route('groups.boards.index',['group'=>$record->id])}}">Boardlar</a>
                         </li>
-                        @if($record->creator->username==Auth::user()->username)
                             <li class="nav-item">
                                 <a class="nav-link {{ (strpos($currentRouteName, 'groups.users.index') !== false) ? 'active' : '' }}"
                                    href="{{route('groups.users.index',['group'=>$record->id])}}">Kullanıcılar</a>
                             </li>
-                        @endif
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">İlgi Alanları</a>
-                            <div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" href="#">Astronomy</a>
-                                <a class="dropdown-item" href="#">Nature</a>
-                                <a class="dropdown-item" href="#">Cooking</a>
-                                <a class="dropdown-item" href="#">Fashion</a>
-                                <a class="dropdown-item" href="#">Wellness</a>
-                                <a class="dropdown-item" href="#">Dieting</a>
-                            </div>
-                        </li>
+
+
                     </ul>
                 </div>
             </nav>

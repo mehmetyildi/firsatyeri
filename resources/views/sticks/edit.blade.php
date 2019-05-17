@@ -16,7 +16,7 @@
 @section('content')
     <div class="card stick-create-card">
         <h5 class="card-header">Stickle</h5>
-        <form action="{{route('sticks.update',['stick'=>$stick->id])}}" method="POST"
+        <form action="{{route('sticks.update',['stick'=>$stick->id,'type'=>$type, 'record'=>$record])}}" method="POST"
               enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="form-label-group col-md-4 offset-8">
@@ -57,41 +57,53 @@
                             <label for="name" class=" control-label">Stick Adı</label>
                             <input type="text" value="{{$stick->name}}" class="form-control" name="name"/>
                         </div>
+                        <div class="error" style="color: red;">{{ $errors->first('name') }}</div>
                         <div class="form-label-group">
                             <label for="about" class=" control-label">İçerik</label>
-                            <textarea class="form-control"  rows="3" name="content">{{$stick->content}}</textarea>
+                            <textarea class="form-control" rows="3" name="content">{{$stick->content}}</textarea>
                         </div>
+                        <div class="error" style="color: red;">{{ $errors->first('content') }}</div>
                         <div class="row">
                             <div class="form-label-group col-md-6 col-sm-12">
                                 <label for="name" class=" control-label">Önceki Fiyat</label>
-                                <input type="text" value="{{$stick->before_price}}" class="form-control" name="before_price"/>
+                                <input type="number" value="{{$stick->before_price}}" class="form-control"
+                                       name="before_price"/>
                             </div>
                             <div class="form-label-group col-md-6 col-sm-12">
                                 <label for="last_name" class="control-label">Fırsat Fiyatı</label>
-                                <input type="text" class="form-control" value="{{$stick->sale_price}}" name="sale_price"/>
+                                <input type="number" class="form-control" value="{{$stick->sale_price}}"
+                                       name="sale_price"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-label-group col-md-6 col-sm-12">
                                 <label for="name" class=" control-label">İl</label>
-                                <select class="js-example-placeholder-single" style="width: 100%" required
+                                <select class="js-example-placeholder-single" style="width: 100%"
                                         name="city_id" id="city_id" tabindex="-1">
                                     <option></option>
                                     @foreach($cities as $city)
-                                        <option value="{{ $city->id }}" {{$stick->city_id==$city->id ? 'selected': ''}}>{{ $city->name }}</option>
+                                        <option
+                                            value="{{ $city->id }}" {{$stick->city_id==$city->id ? 'selected': ''}}>{{ $city->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div  id="district_div" class="form-label-group col-md-6 col-sm-12">
-                                <label for="last_name" class="control-label">İlçe</label>
-                                <select class="js-example-placeholder-single" style="width: 100%" required
-                                        name="district_id" id="district_id" tabindex="-1">
-                                    @foreach($districts as $district)
-                                        <option value="{{ $district->id }}" {{$stick->district_id==$district->id ? 'selected': ''}}>{{ $district->name }}</option>
-                                    @endforeach
+                            @if($stick->city_id>0)
+                                <div id="district_div" class="form-label-group col-md-6 col-sm-12">
+                                    <label for="last_name" class="control-label">İlçe</label>
+                                    <select class="js-example-placeholder-single" style="width: 100%"
+                                            name="district_id" id="district_id" tabindex="-1">
+                                        @foreach($districts as $district)
+                                            <option
+                                                value="{{ $district->id }}" {{$stick->district_id==$district->id ? 'selected': ''}}>{{ $district->name }}</option>
+                                        @endforeach
 
-                                </select>
-                            </div>
+                                    </select>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-label-group ">
+                            <label for="name" class=" control-label">Link</label>
+                            <input type="text" value="{{$stick->link}}" class="form-control" name="link"/>
                         </div>
 
                         <div class="row">
@@ -99,7 +111,8 @@
                                 <label class="control-label">Başlangıç</label>
                                 <div class="input-group date date1">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
-                                        type="text" class="form-control" value="{{$stick->begin_date}}" name="begin_date" autocomplete="off">
+                                        type="text" class="form-control" value="{{ $stick->begin_date ? convertDate($stick->begin_date) : '' }}"
+                                        name="begin_date" autocomplete="off">
                                 </div>
                             </div>
                             <hr>
@@ -107,7 +120,8 @@
                                 <label class="control-label">Bitiş</label>
                                 <div class="input-group date date1">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
-                                        type="text" class="form-control" value="{{$stick->end_date}}" name="end_date" autocomplete="off">
+                                        type="text" class="form-control" value="{{ $stick->end_date ? convertDate($stick->end_date) : '' }}" name="end_date"
+                                        autocomplete="off">
                                 </div>
                             </div>
                         </div>

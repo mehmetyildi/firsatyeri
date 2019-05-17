@@ -57,18 +57,7 @@
                                href="{{route('groups.boards.index',['group'=>$record->id])}}">Boardlar</a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">İlgi Alanları</a>
-                            <div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" href="#">Astronomy</a>
-                                <a class="dropdown-item" href="#">Nature</a>
-                                <a class="dropdown-item" href="#">Cooking</a>
-                                <a class="dropdown-item" href="#">Fashion</a>
-                                <a class="dropdown-item" href="#">Wellness</a>
-                                <a class="dropdown-item" href="#">Dieting</a>
-                            </div>
-                        </li>
+
                     </ul>
                 </div>
             </nav>

@@ -54,11 +54,11 @@
                         <div class="row">
                             <div class="form-label-group col-md-6 col-sm-12">
                                 <label for="name" class=" control-label">Önceki Fiyat</label>
-                                <input type="text" class="form-control" name="before_price"/>
+                                <input type="number" class="form-control" name="before_price"/>
                             </div>
                             <div class="form-label-group col-md-6 col-sm-12">
                                 <label for="last_name"  class="control-label">Fırsat Fiyatı</label>
-                                <input type="text" class="form-control" name="sale_price"/>
+                                <input type="number" class="form-control" name="sale_price"/>
                             </div>
                         </div>
                         <div class="row">

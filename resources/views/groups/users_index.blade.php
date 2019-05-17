@@ -59,18 +59,7 @@
                             </li>
                         @endif
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">İlgi Alanları</a>
-                            <div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" href="#">Astronomy</a>
-                                <a class="dropdown-item" href="#">Nature</a>
-                                <a class="dropdown-item" href="#">Cooking</a>
-                                <a class="dropdown-item" href="#">Fashion</a>
-                                <a class="dropdown-item" href="#">Wellness</a>
-                                <a class="dropdown-item" href="#">Dieting</a>
-                            </div>
-                        </li>
+
                     </ul>
                 </div>
             </nav>
@@ -83,7 +72,10 @@
                 <th scope="col">#</th>
                 <th scope="col">Adı</th>
                 <th scope="col">Kullanıcı Adı</th>
-                <th scope="col">Aksiyon</th>
+                @if($record->creator->username==Auth::user()->username)
+
+                    <th scope="col">Aksiyon</th>
+                @endif
             </tr>
             </thead>
             <tbody>
@@ -91,54 +83,58 @@
             @foreach($users as $index=> $user)
                 <tr>
                     <th scope="row">{{$index+1}}</th>
-                    <td>{{$user->name}}</td>
+                    <td><a href="{{route('users.detail',['username'=>$user->username])}}"><img src="{{url('storage/'.$user->image_url)}}" width="30" class="rounded-circle mr-2" onerror="this.src='{{$user->image_url}}'" alt="">{{$user->name}}</a></td>
                     <td>{{$user->username}}</td>
-                    <td>@if($user->isBanned($record))
-                            <div class="text-danger">
-                                Atıldı
-                            </div>
-                        @else
-                            @if($user->isAdmin($record))
-                                <a class="btn btn-warning btn-sm" data-toggle="modal"
-                                   data-target="#depromoteUser{{ $user->id }}"
-                                   href="#">
-                                    <i class="fas fa-thumbs-down fa-xs">Normal Üye Yap</i>
-                                </a>
-                            @else
+                    @if($record->creator->username==Auth::user()->username)
 
-                                <a class="btn btn-info btn-sm" data-toggle="modal"
-                                   data-target="#promoteUser{{ $user->id }}"
+                        <td>@if($user->isBanned($record))
+                                <div class="text-danger">
+                                    Atıldı
+                                </div>
+                            @else
+                                @if($user->isAdmin($record))
+                                    <a class="btn btn-warning btn-sm" data-toggle="modal"
+                                       data-target="#depromoteUser{{ $user->id }}"
+                                       href="#">
+                                        <i class="fas fa-thumbs-down fa-xs">Normal Üye Yap</i>
+                                    </a>
+                                @else
+
+                                    <a class="btn btn-info btn-sm" data-toggle="modal"
+                                       data-target="#promoteUser{{ $user->id }}"
+                                       href="#">
+                                        <i class="fas fa-thumbs-up fa-xs">Admin Yap</i>
+                                    </a>
+                                @endif
+                                <a class="btn btn-danger btn-sm" data-toggle="modal"
+                                   data-target="#banUser{{ $user->id }}"
                                    href="#">
-                                    <i class="fas fa-thumbs-up fa-xs">Admin Yap</i>
+                                    <i class="fas fa-trash fa-xs">Engelle</i>
                                 </a>
+                                @include('includes.promote_user_modal',[
+                                         'modal_id'=>'promoteUser'. $user->id ,
+                                         'route'=>$pageUrl.'.promote_user',
+                                         'user'=>$user->id,
+                                         'group'=>$record->id,
+                                         'photo_name'=>'image_url'
+                                         ])
+                                @include('includes.promote_user_modal',[
+                                         'modal_id'=>'depromoteUser'. $user->id ,
+                                         'route'=>$pageUrl.'.depromote_user',
+                                         'user'=>$user->id,
+                                         'group'=>$record->id,
+                                         'photo_name'=>'image_url'
+                                         ])
+                                @include('includes.ban_user_modal',[
+                                         'modal_id'=>'banUser'. $user->id ,
+                                         'route'=>$pageUrl.'.ban_user',
+                                         'user'=>$user->id,
+                                         'group'=>$record->id,
+                                         'photo_name'=>'image_url'
+                                         ])
                             @endif
-                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#banUser{{ $user->id }}"
-                               href="#">
-                                <i class="fas fa-trash fa-xs">Engelle</i>
-                            </a>
-                            @include('includes.promote_user_modal',[
-                                     'modal_id'=>'promoteUser'. $user->id ,
-                                     'route'=>$pageUrl.'.promote_user',
-                                     'user'=>$user->id,
-                                     'group'=>$record->id,
-                                     'photo_name'=>'image_url'
-                                     ])
-                            @include('includes.promote_user_modal',[
-                                     'modal_id'=>'depromoteUser'. $user->id ,
-                                     'route'=>$pageUrl.'.depromote_user',
-                                     'user'=>$user->id,
-                                     'group'=>$record->id,
-                                     'photo_name'=>'image_url'
-                                     ])
-                            @include('includes.ban_user_modal',[
-                                     'modal_id'=>'banUser'. $user->id ,
-                                     'route'=>$pageUrl.'.ban_user',
-                                     'user'=>$user->id,
-                                     'group'=>$record->id,
-                                     'photo_name'=>'image_url'
-                                     ])
-                        @endif
-                    </td>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

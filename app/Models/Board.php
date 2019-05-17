@@ -17,15 +17,15 @@ use phpDocumentor\Reflection\Types\Array_;
 class Board extends BaseModel{
     protected $table='boards';
     protected $fillable=['name','description','boardable_id','boardable_type'];
-    protected $rules=array(
+    public static $rules=array(
         'name'=>'required'
     );
-    protected $updaterules=array(
+    public static $updaterules=array(
         'name'=>'required',
     );
     public static function messages(){
         return[
-            'name.required'=>'The name of board can not be empty'
+            'name.required'=>'Board adı boş olamaz'
         ];
     }
     public static $fields=array('name','description');

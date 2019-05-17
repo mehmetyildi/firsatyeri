@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Board;
+use App\Models\City;
 use App\Models\Role;
 use App\Models\Interest;
 use Illuminate\Notifications\Notifiable;
@@ -25,7 +26,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
        'name', 'last_name', 'email', 'password', 'username', 'image_url', 'main_image',
-        'about'
+        'about', 'location','rank_id'
     ];
 
     /**
@@ -51,18 +52,23 @@ class User extends Authenticatable
 
     );
     public static $updaterules = array(
-        'username' => 'unique'
+        'username' => 'required|unique:users',
+        'email'=>'required|unique:users',
+
     );
 
     public static function messages()
     {
         return[
             'username.unique'=>'Bu kullanıcı adı daha önceden kullanılmış.',
+            'username.required'=>'Kullanıcı adı alanı zorunludur',
+            'email.unique'=>'Bu email adı daha önceden kullanılmış.',
+            'email.required'=>'Email adı alanı zorunludur',
         ];
     }
 
     public static $fields = array('name', 'last_name', 'email', 'username',
-        'about'
+        'about','location','rank_id'
     );
     public static $imageFields = array(
         ["name" => "image_url", "width" => 150, "height" => 200, 'crop' => false, 'naming' => 'username', 'diff' => 'photo'],
@@ -100,6 +106,10 @@ class User extends Authenticatable
 
     public function groups(){
         return $this->BelongsToMany(Group::class)->withPivot('is_admin');
+    }
+
+    public function totalGroups(){
+        return $this->ownedGroups->toBase()->merge($this->groups()->get());
     }
 
     public function isOwnerOf(Group $group){
@@ -196,9 +206,26 @@ class User extends Authenticatable
         if($this->isOwnerOf($group)){
             return false;
         }
-        return $group->users()->where('user_id',$this->id)->first()->pivot->is_admin;
+        if($this->groups()->get()->contains($group)){
+
+            return $group->users()->where('user_id',$this->id)->first()->pivot->is_admin;
+        }
+        return false;
     }
 
+    public function location(){
+        return $this->belongsTo(City::class);
+    }
 
+    public static function recommendFor(User $user){
+        $users=User::query()->get();
+        foreach ($user->following as $f){
+            $users=$users->toBase()->merge($f->following()->get());
+        }
+        foreach ($user->groups as $group){
+            $users=$users->toBase()->merge($group->users);
+        }
+        return $users;
+    }
 
 }

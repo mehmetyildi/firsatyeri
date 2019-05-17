@@ -45,11 +45,11 @@
                                         type="submit">Giriş
                                     </button>
                                     <div class="text-center">
-                                        Hesabınız mı yok? Hemen ücretsiz <a class="small" href="{{route('register')}}"> hesap açın</a>
+                                        Hesabınız mı yok? Hemen ücretsiz <a class="text-danger"  href="{{route('register')}}"> hesap açın</a>
                                     </div>
-                                    <div class="text-center">
-                                        <a class="small" href="#">Şifremi unuttum</a>
-                                    </div>
+                                    {{--<div class="text-center">--}}
+                                        {{--<a class="small" href="#">Şifremi unuttum</a>--}}
+                                    {{--</div>--}}
                                 </form>
                             </div>
                         </div>

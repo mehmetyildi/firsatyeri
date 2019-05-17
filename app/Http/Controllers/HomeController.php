@@ -36,12 +36,12 @@ class HomeController extends Controller{
     }
 
     public function home(){
-        if(count(auth()->user()->interests()->get())==0){
-            return redirect()->route('users.interests',['user'=>auth()->user()->id]);
+        if(count(auth()->user()->interests()->get())==0) {
+            return redirect()->route('users.interests', ['user' => auth()->user()->id]);
         }
-        $sticks=Stick::
-        orderBy('created_at','desc')->take(50)->get();
         $record=auth()->user();
+        $sticks=Stick::filterForHome($record);
+
         return view('home', compact('sticks','record'));
     }
 }

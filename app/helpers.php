@@ -3,8 +3,11 @@
 use App\Models\Cms\User\Invitee;
 use App\Models\Cms\Inbox\InboxMail;
 use App\Models\Cms\Inbox\ContactForm;
+use App\Models\Group;
 use Carbon\Carbon;
 use App\Models\Cms\Loginlog;
+use App\User;
+
 
 /* Get any excat moment */
 function todayWithFormat($format){
@@ -25,8 +28,36 @@ function convertDate($value){
     return Carbon::parse($value)->format('d/m/Y');
 }
 
+
 function checkPermissionFor($permission){
     if(!auth()->user()->can($permission) && !auth()->user()->can('do_all')){
+        abort('403');
+    }
+}
+
+function checkPermissionForEditUser(User $user){
+    if(auth()->user()->username!=$user->username){
+        abort('403');
+    }
+}
+
+function checkPermissionForGroupAdmin(Group $group)
+{
+    if (!auth()->user()->isAdmin($group) && !auth()->user()->isOwnerOf($group)) {
+        abort('403');
+    }
+}
+
+function checkPermissionForGroupOwner(Group $group)
+{
+    if ( !auth()->user()->isOwnerOf($group)) {
+        abort('403');
+    }
+}
+
+function checkPermissionForGroupMember(Group $group)
+{
+    if (!auth()->user()->isMemberOfThis($group) && !auth()->user()->isOwnerOf($group)) {
         abort('403');
     }
 }

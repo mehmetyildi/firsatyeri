@@ -16,29 +16,27 @@ use phpDocumentor\Reflection\Types\Array_;
 
 class Stick extends BaseModel{
     public  $table='sticks';
-    public  $fillable=['name','content','image_path','video_path','latitude','altitude','begin_date','end_date','sticked_count','city_id','district_id' ,'user_id','wanted_id','group_id','before_price','sale_price','board_id'];
+    public  $fillable=['name','content','image_path','link','latitude','altitude','begin_date','end_date','sticked_count','city_id','district_id' ,'user_id','wanted_id','group_id','before_price','sale_price','board_id'];
     public static $rules=array(
         'name'=>'required',
         'content'=>'required',
         'image_path'=>'required',
-        'latitude'=>'required',
-        'altitude'=>'required',
+
     );
     public static $updaterules=array(
         'name'=>'required',
         'content'=>'required',
-        'latitude'=>'required',
-        'altitude'=>'required',
+
     );
     public static function messages(){
         return[
-            'name.required'=>'The name of stick can not be empty',
-            'content.required'=>'The content can not be empty',
-            'latitude.required'=>'The location can not be empty',
-            'altitude.required'=>'The location can not be empty',
+            'name.required'=>'Stick adı boş olamaz',
+            'content.required'=>'İçerik alanı boş olamaz',
+            'image_path.required'=>'Resim alanı boş olamaz'
+
         ];
     }
-    public static $fields=array('name','content','latitude','altitude','city_id', 'district_id','before_price','sale_price');
+    public static $fields=array('name','content','latitude','altitude','city_id', 'district_id','before_price','sale_price','link');
     public static $imageFields=array(
         ["name" => "image_path",  'crop' => true, 'naming' => 'name', 'diff' => 'image_path']
 
@@ -101,6 +99,45 @@ class Stick extends BaseModel{
         return $user->publishedSticks()->whereNull('group_id')->get();
     }
 
+    public static function filterForHome(User $user){
+        $sticks=$user->publishedSticks()->get();
+        $following=$user->following()->get();
+        $groups=$user->totalGroups();
+        $city=$user->location;
+        $interests=$user->interests()->get();
+        foreach ($following as $item){
+
+            $sticks=$sticks->toBase()->merge($item->publishedSticks()->get());
+
+            foreach ($item->boards as $board){
+                $sticks=$sticks->toBase()->merge($board->saved_sticks()->get());
+            }
+        }
+
+
+        foreach ($groups as $item){
+            $sticks=$sticks->toBase()->merge($item->sticks()->get());
+            foreach ($item->boards as $board){
+                $sticks=$sticks->toBase()->merge($board->saved_sticks()->get());
+            }
+        }
+
+
+        $local_sticks=Stick::where('city_id',$city)->get();
+
+        foreach ($local_sticks as $local_stick){
+
+            if(count($interests->intersect($local_stick->interests()->get()))){
+                $sticks=$sticks->toBase()->add($local_stick);
+            }
+        }
+        $sticks=$sticks->where('end_date','>=',todayWithFormat('Y-m-d'));
+        $sticks=$sticks->unique('id')->all();
+
+
+        return $sticks;
+    }
+
     public static function filterForBoard(Board $board){
        $owned_sticks=$board->sticks()
            ->where('end_date','>=',todayWithFormat('Y-m-d'))
@@ -129,6 +166,8 @@ class Stick extends BaseModel{
         }
         return $sticks;
     }
+
+
 
     
 }

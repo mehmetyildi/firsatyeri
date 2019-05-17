@@ -1,0 +1,10 @@
+
+body{
+    background-image: url("../storage/confused-travolta-original-pulp-fiction-animated-gif.gif");
+    background-repeat:repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}

@@ -78,4 +78,30 @@
 
         </div>
     @endif
+
+    @if($recommended->count()>0)
+        <div class="card">
+            <div class="card-header">
+                Size Önerdiğimiz Gruplar
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    @foreach($recommended as $f)
+                        <div class="col-md-6" style="border: solid; border-radius: 5px; border-width: 1px">
+                            <a href="{{route('groups.detail',['id'=>$f->id])}}">
+                                <img src="{{url('storage/'.$f->image_path)}}" alt="profile_image"
+                                     onerror="this.src='{{$f->image_path}}'"
+                                     style="height: 150px; width: 150px; float:left; border-radius: 50%;margin-right: 25px">
+                                <p>{{$f->name}}</p>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+
+            </div>
+
+        </div>
+    @endif
 @endsection

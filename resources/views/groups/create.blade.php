@@ -31,6 +31,7 @@
                         <div class="button-center">
                             <img id="blah" style="display: none" src="#" alt="your image"/>
                         </div>
+                        <div class="error" style="color: red;">{{ $errors->first('image_path') }}</div>
 
                     </div>
                     <div class="col col-md-6">
@@ -38,15 +39,20 @@
                             <label for="name" class=" control-label">Grup Adı</label>
                             <input type="text" class="form-control" name="name"/>
                         </div>
+                        <div class="error" style="color: red;">{{ $errors->first('name') }}</div>
+
                         <div class="form-label-group">
                             <label for="about" class=" control-label">Grup Hakkında</label>
                             <textarea class="form-control" rows="3" name="description"></textarea>
                         </div>
+                        <div class="error" style="color: red;">{{ $errors->first('description') }}</div>
 
                         <div class="form-label-group ">
                             <label for="name" class=" control-label">Grubun Amacı</label>
                             <input type="text" class="form-control" name="purpose"/>
                         </div>
+                        <div class="error" style="color: red;">{{ $errors->first('purpose') }}</div>
+
                         <div class="form-label-group ">
                             <label for="name" class=" control-label">Yer</label>
                             <select class="js-example-placeholder-single" style="width: 100%" required

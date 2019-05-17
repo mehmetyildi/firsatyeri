@@ -42,16 +42,21 @@
                             <label for="name" class=" control-label">Grup Adı</label>
                             <input type="text" value="{{$group->name}}" class="form-control" name="name"/>
                         </div>
-                        <div class="form-label-group">
+                    <div class="error" style="color: red;">{{ $errors->first('name') }}</div>
+
+                    <div class="form-label-group">
                             <label for="about" class=" control-label">Grup Hakkında</label>
                             <textarea class="form-control" rows="3" name="description"> {{$group->description}} </textarea>
                         </div>
+                    <div class="error" style="color: red;">{{ $errors->first('description') }}</div>
 
                         <div class="form-label-group ">
                             <label for="name" class=" control-label">Grubun Amacı</label>
                             <input type="text" value="{{$group->purpose}}" class="form-control" name="purpose"/>
                         </div>
-                        <div class="form-label-group ">
+                    <div class="error" style="color: red;">{{ $errors->first('purpose') }}</div>
+
+                    <div class="form-label-group ">
                             <label for="name" class=" control-label">Yer</label>
                             <select class="js-example-placeholder-single" style="width: 100%" required
                                     name="city_id" id="city_id" tabindex="-1">

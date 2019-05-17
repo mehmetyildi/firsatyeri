@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
 
-    <form  action="{{route($pageUrl.'.update',['id'=>$record->id])}}" class="col-md-6 offset-3">
+    <form action="{{route($pageUrl.'.update',['id'=>$record->id])}}" class="col-md-6 offset-3">
         <h1 style="text-align: center">Profilini Düzenle</h1>
         <p>Diğer kullanıcıların seni daha iyi tanıması için aşağdaki bilgilere ihtiyacımız var.</p>
         <div class="button-center">
-            <img src="{{url('storage/'.$record->image_url)}}" alt="profile_image" onerror="this.src='{{$record->image_url}}'"
+            <img src="{{url('storage/'.$record->image_url)}}" alt="profile_image"
+                 onerror="this.src='{{$record->image_url}}'"
                  style="height: 150px; width: 150px; float:left; border-radius: 50%;margin-right: 25px">
             <button type="button" data-toggle="modal" data-target="#userPhoto" class="btn btn-gray200">Değiştir</button>
 
@@ -24,26 +25,36 @@
                 <input type="text" value="{{$record->name}}" class="form-control" name="name"/>
             </div>
             <div class="form-label-group col-md-6 col-sm-12">
-                <label for="last_name"  class="control-label">Soyad</label>
+                <label for="last_name" class="control-label">Soyad</label>
                 <input type="text" value="{{$record->last_name}}" class="form-control" name="last_name"/>
             </div>
         </div>
         <div class="form-label-group ">
-            <label for="email"  class=" control-label">Email</label>
+            <label for="email" class=" control-label">Email</label>
             <input type="text" value="{{$record->email}}" class="form-control" name="email"/>
         </div>
-
+        <div class="error" style="color: red;">{{ $errors->first('email') }}</div>
         <div class="form-label-group ">
-            <label for="username"  class=" control-label">Username</label>
+            <label for="username" class=" control-label">Username</label>
             <input type="text" value="{{$record->username}}" class="form-control" name="username"/>
         </div>
-
-        <div  class="form-label-group">
-            <label for="about"  class=" control-label">Profilin hakkında</label>
-            <textarea class="form-control" rows="3" name="about">{{$record->about}}</textarea>
+        <div class="error" style="color: red;">{{ $errors->first('username') }}</div>
+        <div class="form-label-group ">
+            <label for="name" class=" control-label">Şehrin</label>
+            <select class="js-example-placeholder-single" style="width: 100%" required
+                    name="location" id="city_id" tabindex="-1">
+                <option></option>
+                @foreach($cities as $city)
+                    <option
+                        value="{{ $city->id }}" {{$record->location==$city->id ? 'selected': ''}}>{{ $city->name }}</option>
+                @endforeach
+            </select>
         </div>
 
-
+        <div class="form-label-group">
+            <label for="about" class=" control-label">Profilin hakkında</label>
+            <textarea class="form-control" rows="3" name="about">{{$record->about}}</textarea>
+        </div>
 
 
     </form>
@@ -54,6 +65,17 @@
     'id'=>['record'=>$record->id],
     'photo_name'=>'image_url'
     ])
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+
+            $("#city_id").select2({
+                placeholder: "Şehir seçiniz",
+                allowClear: true
+            });
+        })
+    </script>
 @endsection
 
 

@@ -15,6 +15,8 @@
                     <label for="name" class=" control-label">İçerik</label>
                     <textarea name="content" class="form-control" id="" cols="30" rows="3"></textarea>
                 </div>
+                <div class="error" style="color: red;">{{ $errors->first('content') }}</div>
+
                 <div class="form-group col-md-6">
                     <label class="control-label">Bitiş</label>
                     <div class="input-group date date1">

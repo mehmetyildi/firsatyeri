@@ -40,6 +40,8 @@
                         <div class="button-center">
                             <img id="blah" style="display: none" src="#" alt="your image" />
                         </div>
+                        <div class="error" style="color: red;">{{ $errors->first('image_path') }}</div>
+
 
                     </div>
                     <div class="col col-md-6">
@@ -47,24 +49,29 @@
                             <label for="name" class=" control-label">Stick Adı</label>
                             <input type="text" class="form-control" name="name"/>
                         </div>
+                        <div class="error" style="color: red;">{{ $errors->first('name') }}</div>
+
                         <div  class="form-label-group">
                             <label for="about"  class=" control-label">İçerik</label>
                             <textarea class="form-control" rows="3" name="content"></textarea>
                         </div>
+                        <div class="error" style="color: red;">{{ $errors->first('content') }}</div>
+
                         <div class="row">
                             <div class="form-label-group col-md-6 col-sm-12">
                                 <label for="name" class=" control-label">Önceki Fiyat</label>
-                                <input type="text" class="form-control" name="before_price"/>
+                                <input type="number" class="form-control" name="before_price"/>
                             </div>
                             <div class="form-label-group col-md-6 col-sm-12">
                                 <label for="last_name"  class="control-label">Fırsat Fiyatı</label>
-                                <input type="text" class="form-control" name="sale_price"/>
+                                <input type="number" class="form-control" name="sale_price"/>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="form-label-group col-md-6 col-sm-12">
                                 <label for="name" class=" control-label">İl</label>
-                                <select class="js-example-placeholder-single" style="width: 100%" required name="city_id" id="city_id" tabindex="-1">
+                                <select class="js-example-placeholder-single" style="width: 100%"  name="city_id" id="city_id" tabindex="-1">
                                     <option></option>
                                     @foreach($cities as $city)
                                         <option value="{{ $city->id }}">{{ $city->name }}</option>
@@ -73,10 +80,14 @@
                             </div>
                             <div style="display: none" id="district_div" class="form-label-group col-md-6 col-sm-12">
                                 <label for="last_name"  class="control-label">İlçe</label>
-                                <select class="js-example-placeholder-single" style="width: 100%" required name="district_id" id="district_id" tabindex="-1">
+                                <select class="js-example-placeholder-single" style="width: 100%"  name="district_id" id="district_id" tabindex="-1">
 
                                 </select>
                             </div>
+                        </div>
+                        <div class="form-label-group ">
+                            <label for="name" class=" control-label">Link</label>
+                            <input type="text" class="form-control" name="link"/>
                         </div>
 
                         <div class="row">

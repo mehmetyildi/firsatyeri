@@ -42,20 +42,28 @@ class UsersController extends BaseController{
 
     public function edit($id){
         $record=PageModel::where('id',$id)->firstOrFail();
-        return view($this->pageUrl.'.edit',compact('record'));
+        checkPermissionForEditUser($record);
+        $cities=City::all();
+        return view($this->pageUrl.'.edit',compact('record','cities'));
     }
 
     public function update(Request $request, $id){
-        $record=PageModel::find($id);
+
+        $this->validate($request, PageModel::$updaterules,PageModel::messages());
+        $record=PageModel::where('id',$id)->firstOrFail();
+        checkPermissionForEditUser($record);
+
         foreach($this->fields as $field){
             $record->$field = $request->get($field);
         }
         $record->save();
+        session()->flash('success', 'Profiliniz güncellendi');
         return redirect()->back();
     }
 
     public function update_photo(Request $request, $id){
         $record=PageModel::where('id',$id)->firstOrFail();
+        checkPermissionForEditUser($record);
 
         if($request->hasFile('image_url')){
             $imageField=$this->imageFields[0];
@@ -71,11 +79,14 @@ class UsersController extends BaseController{
             $record->save();
             return redirect()->back();
         }
+        session()->flash('success', 'Profil fotoğrafınız güncellendi');
 
     }
 
     public function update_main_image(Request $request, $id){
         $record=PageModel::where('id',$id)->firstOrFail();
+        checkPermissionForEditUser($record);
+
         if($request->hasFile('main_image')){
             $imageField=$this->imageFields[1];
             parent::handleUserImageUpload(
@@ -88,6 +99,7 @@ class UsersController extends BaseController{
                 $imageField['height']
             );
             $record->save();
+            session()->flash('success', 'Ana resim güncellendi');
             return redirect()->back();
         }
     }
@@ -95,17 +107,23 @@ class UsersController extends BaseController{
     public function follow( $following){
 
         auth()->user()->follow($following);
+        session()->flash('success', $following.' adlı kullanıcıyı takibe başladınız');
         return redirect()->back();
     }
 
     public function unfollow( $following){
 
         auth()->user()->unfollow($following);
+        session()->flash('success', $following.' adlı kullanıcıyı takibi bıraktınız');
+
         return redirect()->back();
     }
 
     public function create_stick($id){
+
         $user=User::find($id);
+        checkPermissionForEditUser($user);
+
         $parent=$user;
         $boards=$user->boards()->get();
         $cities=City::all();
@@ -114,8 +132,10 @@ class UsersController extends BaseController{
     }
 
     public function store_stick(Request $request,$id){
-
+        $this->validate($request, Stick::$rules,Stick::messages());
         $user=PageModel::find($id);
+        checkPermissionForEditUser($user);
+
         $record=new Stick();
         if($record::$dateFields){
             foreach($record::$dateFields as $dateField){
@@ -151,16 +171,24 @@ class UsersController extends BaseController{
             $user->boards()->save($board_new);
             $board_new->sticks()->save($stick);
         }
+        session()->flash('success', 'Stick oluşturuldu');
+
         return redirect()->route('users.detail',['username'=>$user->username]);
     }
 
     public function create_board($id){
+        $user=User::find($id);
+        checkPermissionForEditUser($user);
+
         $interests=Interest::all();
         return view('boards.create',compact('interests','id'));
     }
 
     public function store_board(Request $request, $id){
+        $this->validate($request, Board::$rules,Board::messages());
+
         $user=PageModel::find($id);
+        checkPermissionForEditUser($user);
 
         $user->publishBoard(
             $board=new Board(request(['name','description']))
@@ -174,6 +202,8 @@ class UsersController extends BaseController{
 
             }
         }
+        session()->flash('success', 'Board oluşturuldu');
+
         return redirect()->route($this->pageUrl.'.detail',['username'=>$user->username]);
     }
 
@@ -198,7 +228,7 @@ class UsersController extends BaseController{
     }
 
     public function move_stick_to_board(User $user, Stick $stick, Request $request){
-
+        checkPermissionForEditUser($user);
        $new_board=Board::find($request->board_id);
        $stick->board_id=$new_board->id;
        $stick->save();
@@ -207,6 +237,7 @@ class UsersController extends BaseController{
     }
 
     public function move_stick_to_group(User $user, Stick $stick,Request $request){
+        checkPermissionForEditUser($user);
         $new_board=Board::find($request->board_id);
         $group=Group::find($request->group_id);
         if(!$new_board->saved_sticks()->get()->contains($stick)){
@@ -219,6 +250,8 @@ class UsersController extends BaseController{
     }
 
     public function save_stick(Request $request,User $user, Stick $stick){
+        checkPermissionForEditUser($user);
+
         $board=Board::find($request->board_id);
         if(!$board->saved_sticks()->get()->contains($stick)){
             $board->saved_sticks()->attach($stick);
@@ -229,31 +262,47 @@ class UsersController extends BaseController{
     }
 
     public function interests(User $user){
+        checkPermissionForEditUser($user);
+
         $interests=Interest::all();
         return view('users.interests',compact('user','interests'));
     }
 
     public function interests_store(Request $request, User $user){
+        checkPermissionForEditUser($user);
+
         $user->interests()->sync($request->interests);
         return redirect()->route('users.edit',['id'=>$user->id]);
     }
 
     public function interests_edit(User $user){
+        checkPermissionForEditUser($user);
+
         $interests=Interest::all();
+
         return view('users.interests_edit',compact('interests','user'));
     }
 
     public function interests_update(Request $request, User $user){
+        checkPermissionForEditUser($user);
+
         $user->interests()->sync($request->interests);
+        session()->flash('success', 'İlgi alanlarınız güncellendi');
+
         return redirect()->route('users.edit',['id'=>$user->id]);
     }
 
     public function edit_board(User $record, Board $board){
+        checkPermissionForEditUser($record);
+
         $interests=Interest::all();
         return view('boards.edit',compact('interests','board','record'));
     }
 
     public function update_board(Request $request, User $record, Board $board){
+        checkPermissionForEditUser($record);
+
+        $this->validate($request, Board::$updaterules,Board::messages());
 
         $board->name=$request->name;
         $board->description=$request->description;
@@ -262,7 +311,18 @@ class UsersController extends BaseController{
         foreach ($board->sticks as $stick){
             $stick->interests()->sync($board->interests()->get());
         }
+        session()->flash('success', 'Board güncellendi');
+
         return redirect()->route($this->pageUrl.'.board.detail',['id'=>$record->id,'board'=>$board->id]);
+    }
+
+    public function recommended($username){
+
+        $user=User::where('username',$username)->firstOrFail();
+        checkPermissionForEditUser($user);
+
+        $users=User::recommendFor($user);
+        return view('users.recommended_users',compact('users'));
     }
 
 }

@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function (){
             Route::name('interests.update')->post('/interests/{user}/update','UsersController@interests_update');
             Route::name('boards.edit')->get('{record}/boards/{board}/edit','UsersController@edit_board');
             Route::name('boards.update')->post('{record}/boards/update/{board}','UsersController@update_board');
+            Route::name('recommended')->get('recommended/{username}','UsersController@recommended');
 
         }
     );
@@ -55,9 +56,9 @@ Route::middleware('auth')->group(function (){
         function (){
             Route::name('comments.store')->get('/{stick}/store/create','SticksController@create_comment');
             Route::name('detail')->get('/detail/{stick}','SticksController@detail');
-            Route::name('edit')->get('/{stick}','SticksController@edit');
+            Route::name('edit')->get('/{type}/{record}/{stick}','SticksController@edit');
             Route::name('delete')->delete('/{stick}','SticksController@delete');
-            Route::name('update')->post('/{stick}','SticksController@update');
+            Route::name('update')->post('/{type}/{record}/{stick}','SticksController@update');
             Route::name('update_photo')->post('/update_photo/{stick}','SticksController@update_photo');
         }
     );
@@ -87,13 +88,15 @@ Route::middleware('auth')->group(function (){
             Route::name('board.detail')->get('{id}/boards/{board}/detail', 'GroupsController@boards_detail');
             Route::name('wanted.sticks.create')->get('{group}/wanted/{wanted}/sticks/', 'GroupsController@create_wanted_stick');
             Route::name('wanted.sticks.store')->post('{group}/wanted/{wanted}/sticks/', 'GroupsController@store_wanted_stick');
-            Route::name('wanted.detail')->get('{group}/wanted/{wanted}/detail', 'GroupsController@wanted_detail');
+            Route::name('wanted.detail')->get('{record}/wanted/{wanted}/detail', 'GroupsController@wanted_detail');
             Route::name('users.index')->get('{group}/users','GroupsController@user_index');
             Route::name('ban_user')->post('{group}/users/{user}/ban','GroupsController@ban_user');
             Route::name('promote_user')->post('{group}/users/{user}/promote','GroupsController@promote_user');
             Route::name('depromote_user')->post('{group}/users/{user}/depromote','GroupsController@depromote_user');
             Route::name('move_stick_to_board')->post('/groups/{user}/boards/{stick}','GroupsController@move_stick_to_board');
             Route::name('move_stick_to_group')->post('/groups/{user}/groups/{stick}','GroupsController@move_stick_to_group');
+            Route::name('wanted.sticks')->get('/{group}/wanted/{wanted}/sticks','GroupsController@wanted_sticks');
+
         }
     );
 

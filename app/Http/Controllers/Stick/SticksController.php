@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Stick;
 
 use App\Models\Comment;
+use App\Models\Group;
 use App\Models\Stick as PageModel;
 use App\Models\City;
 use App\Models\District;
@@ -105,21 +106,33 @@ class SticksController extends BaseController
         return redirect()->back();
     }
 
-    public function edit(Stick $stick)
+    public function edit($type,$record,Stick $stick)
     {
         if (count($stick->group()->get()) == 0) {
             $boards = Auth::user()->boards()->get();
         } else {
             $boards = $stick->group->boards()->get();
         }
-        $districts = $stick->city->districts()->get();
+        if($stick->city_id>0){
+            $districts = $stick->city->districts()->get();
+
+        }
         $cities = City::all();
-        return view('sticks.edit', compact('stick', 'cities', 'boards', 'districts'));
+        return view('sticks.edit', compact('stick', 'cities', 'boards', 'districts','type','record'));
     }
 
-    public function update(Request $request, Stick $stick)
+    public function update(Request $request,  $type, $record,Stick $stick)
     {
+        $this->validate($request, PageModel::$updaterules,PageModel::messages());
 
+        if($type=='users'){
+            $return_url=User::find($record)->username;
+            $attr='username';
+        }
+        else{
+            $return_url=Group::find($record)->id;
+            $attr='id';
+        }
         /** Regular Inputs **/
         foreach ($this->fields as $field) {
             $stick->$field = $request->get($field);
@@ -132,8 +145,8 @@ class SticksController extends BaseController
         }
 
         $stick->save();
-        session()->flash('success', 'Yeni ' . $this->pageItem . ' güncellendi.');
-        return redirect()->route('sticks.detail', $stick->id);
+        session()->flash('success',  $this->pageItem . ' güncellendi.');
+        return redirect()->route($type.'.detail', [$attr=>$return_url]);
     }
 
     public function update_photo(Request $request, Stick $stick)
@@ -149,9 +162,12 @@ class SticksController extends BaseController
                 $imageField['name']
             );
 
-            $stick->save();
-            return redirect()->back();
+
         }
+        $stick->save();
+        session()->flash('success',  'Resim güncellendi.');
+
+        return redirect()->back();
 
     }
 

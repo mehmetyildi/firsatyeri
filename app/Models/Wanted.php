@@ -28,7 +28,7 @@ class Wanted extends BaseModel
     public static function messages()
     {
         return [
-            'content.required' => 'The content can not be empty',
+            'content.required' => 'İçerik boş olamaz',
         ];
     }
 

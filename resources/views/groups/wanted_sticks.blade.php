@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{url('css/comment.css')}}">
 @endsection
 @section('content')
+    @foreach($sticks as $stick)
     <section class="bg-gray200 pt-5 pb-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -69,9 +70,7 @@
                                 {{$stick->name}} </h1>
                             <p>{!! $stick->content !!}</p>
                             <ul>
-                                @if($stick->city_id>0)
                                 <li><strong>Yer: {{$stick->district->name."/".$stick->city->name}}</strong></li>
-                                @endif
                                 <li><strong>Eski Fiyat: {{$stick->before_price." ₺"}}</strong></li>
                                 <li><strong>Fırsat Fiyatı: {{$stick->sale_price." ₺"}}</strong></li>
                                 <li><strong>Fırsat
@@ -83,7 +82,7 @@
                                 <small class="d-block">
                                     <a class="btn btn-sm btn-gray200" href="{{$stick->link}}">
                                         <i class="fas fa-external-link-alt"></i>
-                                        Fırsatın Olduğu Siteye Gir
+                                        Visit Website
                                     </a>
                                 </small>
                             @endif
@@ -126,6 +125,7 @@
             </div>
         </div>
     </section>
+    @endforeach
     @include('includes.delete_stick_modal',[
      'modal_id'=>'deleteStick',
      'route'=>'sticks.delete',

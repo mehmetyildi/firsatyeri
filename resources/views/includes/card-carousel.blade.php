@@ -7,10 +7,10 @@
                     <p>Son Tarih: {{$wanted->deadline->format('d/m/Y')}}</p>
                     <p>İstek: {{$wanted->content}}</p>
                     @if(count($wanted->sticks()->get())>0)
-
+                        <a href="{{route('groups.wanted.sticks', ['group'=>$record->id, '$wanted'=>$wanted->id])}}">
                         <div class="text-danger"><i class="far fa-comments">{{count($wanted->sticks()->get())}}</i>
                         </div>
-
+                        </a>
                     @endif
                 </a>
                 <div class="col-md-12 answer">
