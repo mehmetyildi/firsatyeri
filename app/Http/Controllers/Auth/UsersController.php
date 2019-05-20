@@ -77,9 +77,10 @@ class UsersController extends BaseController{
                 $imageField['height']
                 );
             $record->save();
+            session()->flash('success', 'Profil fotoğrafınız güncellendi');
+
             return redirect()->back();
         }
-        session()->flash('success', 'Profil fotoğrafınız güncellendi');
 
     }
 

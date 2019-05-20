@@ -20,7 +20,7 @@ use phpDocumentor\Reflection\Types\Array_;
 class Group extends BaseModel
 {
     protected $table = 'groups';
-    protected $fillable = ['name', 'city_id', 'description', 'purpose', 'user_id', 'image_path'];
+    protected $fillable = ['name', 'city_id', 'description', 'purpose', 'user_id', 'image_path','isBanned'];
     public static $rules = array(
         'image_path'=>'required',
         'name' => 'required',
@@ -53,7 +53,7 @@ class Group extends BaseModel
         "image_path"
     );
     public static $docFields = array();
-    public static $booleanFields = array();
+    public static $booleanFields = array('isBanned');
     public static $dateFields = array();
 
     public static $urlFields = array();

@@ -62,6 +62,8 @@ function checkPermissionForGroupMember(Group $group)
     }
 }
 
+
+
 function matchesWithInvitee($token){
 	$invitee = Invitee::where('token', $token)->first();
 	if($invitee){

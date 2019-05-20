@@ -49,6 +49,7 @@ class CreateUsersTable extends Migration
             $table->string('main_image')->default('background-cement-concrete-242236.jpg');
             $table->string('email')->unique();
             $table->text('about')->nullable();
+            $table->boolean('isBanned')->default(0)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

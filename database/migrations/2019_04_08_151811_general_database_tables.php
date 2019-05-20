@@ -26,6 +26,7 @@ class GeneralDatabaseTables extends Migration
             $table->integer('city_id')->nullable();
             $table->text('description');
             $table->text('purpose');
+            $table->boolean('isBanned')->default(0)->nullable();
             $table->string('image_path')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

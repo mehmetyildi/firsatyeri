@@ -26,7 +26,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
        'name', 'last_name', 'email', 'password', 'username', 'image_url', 'main_image',
-        'about', 'location','rank_id'
+        'about', 'location','rank_id', 'isBanned'
     ];
 
     /**
@@ -82,6 +82,7 @@ class User extends Authenticatable
     public static $docFields = array(
     );
     public static $booleanFields = array(
+    'isBanned'
     );
     public static $dateFields = array(
     );

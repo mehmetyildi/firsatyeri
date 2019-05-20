@@ -44,7 +44,7 @@ class GroupsController extends BaseController
     public function index()
     {
        // checkPermissionFor('edit_content');
-        $records = PageModel::all();
+        $records = PageModel::where('isBanned','0')->get();
         return view('cms.'.$this->pageUrl.'.index', compact('records'));
     }
 
@@ -212,11 +212,8 @@ class GroupsController extends BaseController
     {
        // checkPermissionFor('delete_content');
 
-        if(parent::handleDestroy($this->model, $record, $this->urlColumn, true, true)){
-            session()->flash('success', $this->pageItem.' silindi.');
-        }else{
-            session()->flash('danger', 'Böyle bir kayıt yok.');
-        }
+       $record->isBanned=1;
+       $record->save();
         return redirect()->route('cms.'.$this->pageUrl.'.index');
 
     }
