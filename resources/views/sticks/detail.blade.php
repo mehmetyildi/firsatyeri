@@ -104,7 +104,7 @@
                                 <div class="col-md-12 ">
                                     <div id="comments" class="mt-5">
 
-                                        <h2>{{$stick->comments->count()}} Comments</h2>
+                                        <h2>{{$stick->comments->count()}} yorum yapılmış</h2>
 
                                         <ol class="medias py-md-2 my-md-2 px-sm-0 mx-sm-0">
                                             @foreach($stick->comments as $comment)

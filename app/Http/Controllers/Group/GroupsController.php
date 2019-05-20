@@ -131,7 +131,7 @@ class GroupsController extends BaseController{
         }
 
         $group->publishStick(
-            $stick=new Stick(request(['name','content','before_price','sale_price','city_id','district_id']))
+            $stick=new Stick(request(['name','content','before_price','sale_price','city_id','district_id','link']))
             ,$record->image_path,$record->begin_date,$record->end_date
         );
         $stick->user_id=auth()->user()->id;

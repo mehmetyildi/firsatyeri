@@ -157,7 +157,7 @@ class UsersController extends BaseController{
         }
 
         $user->publishStick(
-            $stick=new Stick(request(['name','content','before_price','sale_price','city_id','district_id']))
+            $stick=new Stick(request(['name','content','before_price','sale_price','city_id','district_id','link']))
             ,$record->image_path,$record->begin_date,$record->end_date
         );
         $board=$user->boards()->find($request->board_id);
