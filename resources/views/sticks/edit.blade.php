@@ -86,6 +86,15 @@
 
                                     </select>
                                 </div>
+                            @else
+                                <div id="district_div" class="form-label-group col-md-6 col-sm-12">
+                                    <label for="last_name" class="control-label">İlçe</label>
+                                    <select class="js-example-placeholder-single" style="width: 100%"
+                                            name="district_id" id="district_id" tabindex="-1">
+
+
+                                    </select>
+                                </div>
                             @endif
                         </div>
                         <div class="form-label-group ">
@@ -98,7 +107,8 @@
                                 <label class="control-label">Başlangıç</label>
                                 <div class="input-group date date1">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
-                                        type="text" class="form-control" value="{{ $stick->begin_date ? convertDate($stick->begin_date) : '' }}"
+                                        type="text" class="form-control"
+                                        value="{{ $stick->begin_date ? convertDate($stick->begin_date) : '' }}"
                                         name="begin_date" autocomplete="off">
                                 </div>
                             </div>
@@ -107,7 +117,9 @@
                                 <label class="control-label">Bitiş</label>
                                 <div class="input-group date date1">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
-                                        type="text" class="form-control" value="{{ $stick->end_date ? convertDate($stick->end_date) : '' }}" name="end_date"
+                                        type="text" class="form-control"
+                                        value="{{ $stick->end_date ? convertDate($stick->end_date) : '' }}"
+                                        name="end_date"
                                         autocomplete="off">
                                 </div>
                             </div>
@@ -191,8 +203,9 @@
             });
 
             $('#city_id').on('change', function () {
-
                 var city = $(this).val();
+                console.log(city)
+
                 $('#district_div').show();
                 if (city) {
                     $.ajax({

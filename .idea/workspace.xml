@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="619a2f04-32a8-4538-ae5c-10a1b629c21e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Stick.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Stick.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/cms/includes/side-nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cms/includes/side-nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Stick/SticksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Stick/SticksController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/sticks/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sticks/edit.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,14 +60,14 @@
           <entry key="jpg" value="4" />
           <entry key="js" value="24" />
           <entry key="json" value="4" />
-          <entry key="php" value="803" />
+          <entry key="php" value="804" />
           <entry key="scss" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key=".env file" value="2" />
-          <entry key="Blade" value="428" />
+          <entry key="Blade" value="429" />
           <entry key="CSS" value="42" />
           <entry key="HTML" value="1" />
           <entry key="Image" value="4" />
@@ -86,18 +84,18 @@
           <entry key="env" value="17" />
           <entry key="js" value="145" />
           <entry key="json" value="6" />
-          <entry key="php" value="51457" />
+          <entry key="php" value="51511" />
           <entry key="scss" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="17" />
-          <entry key="Blade" value="19690" />
+          <entry key="Blade" value="19712" />
           <entry key="CSS" value="630" />
           <entry key="JSON" value="6" />
           <entry key="JavaScript" value="145" />
-          <entry key="PHP" value="31767" />
+          <entry key="PHP" value="31799" />
           <entry key="SCSS" value="6" />
         </counts>
       </usages-collector>
@@ -132,7 +130,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
+            <state relative-caret-position="245">
               <caret line="60" column="57" lean-forward="true" selection-start-line="60" selection-start-column="57" selection-end-line="60" selection-end-column="57" />
             </state>
           </provider>
@@ -141,8 +139,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Stick/SticksController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="144" column="9" lean-forward="true" selection-start-line="144" selection-start-column="9" selection-end-line="144" selection-end-column="9" />
+            <state relative-caret-position="273">
+              <caret line="120" column="38" selection-start-line="120" selection-start-column="38" selection-end-line="120" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -150,8 +148,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/sticks/edit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+            <state relative-caret-position="374">
+              <caret line="211" column="25" lean-forward="true" selection-start-line="211" selection-start-column="25" selection-end-line="211" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/cms/home.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
             </state>
           </provider>
         </entry>
@@ -214,7 +221,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/components/create_stick_button.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/components/create_wanted_button.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/components/edit_button.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/includes/card-carousel.blade.php" />
@@ -231,7 +237,6 @@
         <option value="$PROJECT_DIR$/resources/views/boards/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/users/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/Board.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Stick/SticksController.php" />
         <option value="$PROJECT_DIR$/resources/views/groups/create_wanted_stick.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/groups/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Group/GroupsController.php" />
@@ -264,6 +269,8 @@
         <option value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php" />
         <option value="$PROJECT_DIR$/app/Models/Stick.php" />
         <option value="$PROJECT_DIR$/resources/views/cms/includes/side-nav.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/cms/home.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Stick/SticksController.php" />
         <option value="$PROJECT_DIR$/resources/views/sticks/edit.blade.php" />
       </list>
     </option>
@@ -474,36 +481,6 @@
               <item name="firsatyeri" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="cms" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="firsatyeri" type="b2602c69:ProjectViewProjectNode" />
-              <item name="firsatyeri" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="cms" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="firsatyeri" type="b2602c69:ProjectViewProjectNode" />
-              <item name="firsatyeri" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="cms" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="firsatyeri" type="b2602c69:ProjectViewProjectNode" />
-              <item name="firsatyeri" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="firsatyeri" type="b2602c69:ProjectViewProjectNode" />
-              <item name="firsatyeri" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="layouts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -602,12 +579,12 @@
       <workItem from="1557402158633" duration="12479000" />
       <workItem from="1557671840235" duration="71697000" />
       <workItem from="1557986641886" duration="54078000" />
-      <workItem from="1558354628052" duration="782000" />
+      <workItem from="1558354628052" duration="1821000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="336115000" />
+    <option name="totallyTimeSpent" value="337154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -643,13 +620,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/groups/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="89" column="41" selection-start-line="89" selection-start-column="41" selection-end-line="89" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/components/move_stick_button.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -973,24 +943,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/cms/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
+        <state relative-caret-position="245">
           <caret line="60" column="57" lean-forward="true" selection-start-line="60" selection-start-column="57" selection-end-line="60" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Stick/SticksController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="144" column="9" lean-forward="true" selection-start-line="144" selection-start-column="9" selection-end-line="144" selection-end-column="9" />
+        <state relative-caret-position="273">
+          <caret line="120" column="38" selection-start-line="120" selection-start-column="38" selection-end-line="120" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/sticks/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+        <state relative-caret-position="374">
+          <caret line="211" column="25" lean-forward="true" selection-start-line="211" selection-start-column="25" selection-end-line="211" selection-end-column="25" />
         </state>
       </provider>
     </entry>

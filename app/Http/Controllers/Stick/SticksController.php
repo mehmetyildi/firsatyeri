@@ -117,7 +117,11 @@ class SticksController extends BaseController
             $districts = $stick->city->districts()->get();
 
         }
+        else {
+            $districts=District::all();
+        }
         $cities = City::all();
+
         return view('sticks.edit', compact('stick', 'cities', 'boards', 'districts','type','record'));
     }
 
