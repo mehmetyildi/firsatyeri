@@ -83,8 +83,8 @@
             @foreach($users as $index=> $user)
                 <tr>
                     <th scope="row">{{$index+1}}</th>
-                    <td><a href="{{route('users.detail',['username'=>$user->username])}}"><img src="{{url('storage/'.$user->image_url)}}" width="30" class="rounded-circle mr-2" onerror="this.src='{{$user->image_url}}'" alt="">{{$user->name}}</a></td>
-                    <td>{{$user->username.' '.$user->last_name}}</td>
+                    <td><a href="{{route('users.detail',['username'=>$user->username])}}"><img src="{{url('storage/'.$user->image_url)}}" width="30" class="rounded-circle mr-2" onerror="this.src='{{$user->image_url}}'" alt="">{{$user->name.' '.$user->last_name}}</a></td>
+                    <td>{{$user->username}}</td>
                     @if($record->creator->username==Auth::user()->username)
 
                         <td>@if($user->isBanned($record))
