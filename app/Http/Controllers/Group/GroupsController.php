@@ -217,7 +217,7 @@ class GroupsController extends BaseController{
     public function update(Request $request, Group $group){
         checkPermissionForGroupAdmin($group);
 
-        $this->validate($request, Group::$rules,Group::messages());
+        $this->validate($request, Group::$updaterules,Group::messages());
 
         /** Regular Inputs **/
         foreach($this->fields as $field){
