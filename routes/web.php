@@ -86,8 +86,8 @@ Route::middleware('auth')->group(function (){
             Route::name('sticks.detail')->get('{record}/sticks/detail/{stick}','GroupsController@sticks_detail');
             Route::name('boards.index')->get('{group}/boards/index','GroupsController@boards_index');
             Route::name('board.detail')->get('{id}/boards/{board}/detail', 'GroupsController@boards_detail');
-            Route::name('wanted.sticks.create')->get('{group}/wanted/{wanted}/sticks/', 'GroupsController@create_wanted_stick');
-            Route::name('wanted.sticks.store')->post('{group}/wanted/{wanted}/sticks/', 'GroupsController@store_wanted_stick');
+            Route::name('wanted.sticks.create')->get('{group}/wanted/{wanted}/sticks/create', 'GroupsController@create_wanted_stick');
+            Route::name('wanted.sticks.store')->post('{group}/wanted/{wanted}/sticks/store', 'GroupsController@store_wanted_stick');
             Route::name('wanted.detail')->get('{record}/wanted/{wanted}/detail', 'GroupsController@wanted_detail');
             Route::name('users.index')->get('{group}/users','GroupsController@user_index');
             Route::name('ban_user')->post('{group}/users/{user}/ban','GroupsController@ban_user');

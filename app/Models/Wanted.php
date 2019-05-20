@@ -19,16 +19,19 @@ class Wanted extends BaseModel
     protected $fillable = ['content','deadline','isResolved','user_id','group_id'];
     public static $rules = array(
         'content' => 'required',
-
+        'deadline'=>'required'
     );
     public static $updaterules = array(
         'content' => 'required',
+        'deadline'=>'required'
+
     );
 
     public static function messages()
     {
         return [
             'content.required' => 'İçerik boş olamaz',
+            'deadline.required'=>'Bitiş tarihi boş olamaz'
         ];
     }
 

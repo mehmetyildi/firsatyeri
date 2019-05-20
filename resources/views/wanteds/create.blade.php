@@ -24,6 +24,7 @@
                         <input type="text" value="{{ old('deadline')}}" class="form-control" name="deadline" autocomplete="off">
                     </div>
                 </div>
+                <div class="error" style="color: red;">{{ $errors->first('deadline') }}</div>
 
 
                 <br>
