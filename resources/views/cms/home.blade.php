@@ -24,47 +24,5 @@
 <script src="{{ url('js/cms_tasks.js') }}"></script>
 <!-- ChartJS-->
 <script src="{{ url('cms/js/plugins/chartJs/Chart.min.js') }}"></script>
-@if(config('app.env') == 'production')
-<script>
-   $(document).ready(function() {
 
-        var lineData = {
-            labels: [
-            @foreach($totalVisitorsAndPageViews as $label)
-            "{{ $label['date']->format('d.m.y') }}", 
-            @endforeach
-            ],
-            datasets: [
-                {
-                    label: "Görüntüleme",
-                    backgroundColor: "rgba(26,179,148,0.2)",
-                    borderColor: "rgba(26,179,148,0.7)",
-                    pointBackgroundColor: "rgba(26,179,148,1)",
-                    pointBorderColor: "#fff",
-                    data: [
-                        @foreach($totalVisitorsAndPageViews as $data)
-                        {{ $data['pageViews'] }}, 
-                        @endforeach
-                    ]
-                }
-            ]
-        };
-
-        var lineOptions = {
-            responsive: true,
-            elements: {
-                line: {
-                    tension: 0.1
-                }
-            }
-        };
-
-
-        var ctx = document.getElementById("lineChart").getContext("2d");
-        new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
-
-
-    });
-</script>
-@endif
 @endsection

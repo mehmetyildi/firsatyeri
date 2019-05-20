@@ -19,20 +19,7 @@
         <form action="{{route('sticks.update',['stick'=>$stick->id,'type'=>$type, 'record'=>$record])}}" method="POST"
               enctype="multipart/form-data">
             {{csrf_field()}}
-            <div class="form-label-group col-md-4 offset-8">
-                <label for="city_id" class="col-sm-3 control-label">Board</label>
-                <div class="col-md-12">
-                    <select class="js-example-tags1" style="width: 100%" required name="board_id" id="board_id"
-                            tabindex="-1">
 
-                        @foreach($boards as $board)
-                            <option
-                                value="{{ $board->id }}" {{$board->id==$stick->board_id ?  'selected': ''}}>{{ $board->name }}</option>
-                        @endforeach
-                    </select>
-
-                </div>
-            </div>
             <hr>
             <div class="card-body">
                 <div class="row ">

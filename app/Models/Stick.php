@@ -96,7 +96,13 @@ class Stick extends BaseModel{
 
     public static function filterForUser($username){
         $user=User::where('username',$username)->firstOrFail();
-        return $user->publishedSticks()->whereNull('group_id')->get();
+        $sticks= $user->publishedSticks()->whereNull('group_id')->get();
+        foreach ($user->boards as $board){
+            $sticks=$sticks->toBase()->merge($board->saved_sticks()->get());
+        }
+        $sticks=$sticks->where('end_date','>=',todayWithFormat('Y-m-d'));
+        $sticks=$sticks->unique('id')->all();
+        return $sticks;
     }
 
     public static function filterForHome(User $user){
@@ -113,14 +119,14 @@ class Stick extends BaseModel{
                 $sticks=$sticks->toBase()->merge($board->saved_sticks()->get());
             }
         }
-
-
         foreach ($groups as $item){
             $sticks=$sticks->toBase()->merge($item->sticks()->get());
             foreach ($item->boards as $board){
                 $sticks=$sticks->toBase()->merge($board->saved_sticks()->get());
             }
         }
+
+
 
 
         $local_sticks=Stick::where('city_id',$city)->get();

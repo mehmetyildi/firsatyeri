@@ -35,9 +35,9 @@
                 <a href="{{ route('cms.interests.index') }}"><i class="fa fa-italic"></i> <span class="nav-label">İlgi Alanları</span></a>
             </li>
 
-            <li class="{{ (strpos($currentRouteName, 'ranks') !== false) ? 'active' : '' }}">
-                <a href="{{ route('cms.ranks.index') }}"><i class="fa fa-star"></i> <span class="nav-label">Rütbeler</span></a>
-            </li>
+            {{--<li class="{{ (strpos($currentRouteName, 'ranks') !== false) ? 'active' : '' }}">--}}
+                {{--<a href="{{ route('cms.ranks.index') }}"><i class="fa fa-star"></i> <span class="nav-label">Rütbeler</span></a>--}}
+            {{--</li>--}}
 
             <li class="{{ (strpos($currentRouteName, 'users') !== false) ? 'active' : '' }}">
                 <a href="{{ route('cms.users.index') }}"><i class="fa fa-user"></i> <span class="nav-label">Kullanıcılar</span></a>
