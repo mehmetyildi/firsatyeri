@@ -88,7 +88,7 @@
             <div class="card-body">
                 <div class="row">
                     @foreach($recommended as $f)
-                        @if(!Auth::user()->groups->contains($f))
+                        @if(!Auth::user()->groups->contains($f)&&!Auth()->user()->isOwnerOf($f))
                         <div class="col-md-6" style="border: solid; border-radius: 5px; border-width: 1px">
                             <a href="{{route('groups.detail',['id'=>$f->id])}}">
                                 <img src="{{url('storage/'.$f->image_path)}}" alt="profile_image"
