@@ -13,10 +13,12 @@
     <div class="container mb-4">
         <div class="row" style="padding-top: 50px;">
             <div class="col">
-                <h1 class="font-weight-bold title">{{$record->username}}</h1>
+                <h1 class="font-weight-bold title">{{$record->name}}</h1>
             </div>
             <div class="col">
-                @if(Auth::user()->isOwnerOf($record)|| Auth::user()->isAdmin($record))
+                @if(Auth::user()->isBanned($record))
+                <div class="text-danger">Bu gruptan atıldınız</div>
+                @elseif(Auth::user()->isOwnerOf($record)|| Auth::user()->isAdmin($record))
                     @include('components.edit_button')
                     @include('components.create_board_button')
                     @include('components.create_stick_button')

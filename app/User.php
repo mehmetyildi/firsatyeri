@@ -110,7 +110,7 @@ class User extends Authenticatable
     }
 
     public function totalGroups(){
-        return $this->ownedGroups->toBase()->merge($this->groups()->get());
+        return $this->ownedGroups->toBase()->merge($this->groups()->wherePivot('is_banned','0')->get());
     }
 
     public function isOwnerOf(Group $group){
@@ -118,15 +118,21 @@ class User extends Authenticatable
     }
 
     public function isMemberOfThis(Group $group){
-        return $this->groups()->get()->contains($group);
+        return $this->groups()
+            ->wherePivot('is_Banned',0)
+            ->get()->contains($group);
     }
 
     public function isAdminOf(){
-        return $this->groups()->wherePivot('is_admin',1)->get();
+        return $this->groups()->wherePivot('is_admin',1)
+            ->wherePivot('is_Banned',0)
+            ->get();
     }
 
     public function isMemberOf(){
-        return $this->groups()->wherePivot('is_admin',0)->get();
+        return $this->groups()->wherePivot('is_admin',0)
+            ->wherePivot('is_Banned',0)
+            ->get();
     }
 
     public function comments(){
@@ -207,7 +213,7 @@ class User extends Authenticatable
         if($this->isOwnerOf($group)){
             return false;
         }
-        if($this->groups()->get()->contains($group)){
+        if($this->groups()->wherePivot('is_Banned',0)->get()->contains($group)){
 
             return $group->users()->where('user_id',$this->id)->first()->pivot->is_admin;
         }
@@ -226,6 +232,8 @@ class User extends Authenticatable
         foreach ($user->groups as $group){
             $users=$users->toBase()->merge($group->users);
         }
+        $users=$users->unique('id')->all();
+
         return $users;
     }
 

@@ -112,9 +112,7 @@ class Stick extends BaseModel{
         $city=$user->location;
         $interests=$user->interests()->get();
         foreach ($following as $item){
-
             $sticks=$sticks->toBase()->merge($item->publishedSticks()->get());
-
             foreach ($item->boards as $board){
                 $sticks=$sticks->toBase()->merge($board->saved_sticks()->get());
             }
@@ -125,10 +123,6 @@ class Stick extends BaseModel{
                 $sticks=$sticks->toBase()->merge($board->saved_sticks()->get());
             }
         }
-
-
-
-
         $local_sticks=Stick::where('city_id',$city)->get();
 
         foreach ($local_sticks as $local_stick){
@@ -153,7 +147,9 @@ class Stick extends BaseModel{
            ->where('end_date','>=',todayWithFormat('Y-m-d'))
            ->get();
        $sticks=$owned_sticks->toBase()->merge($saved_sticks);
-       return $sticks;
+        $sticks=$sticks->unique('id')->all();
+
+        return $sticks;
     }
 
 
@@ -170,6 +166,8 @@ class Stick extends BaseModel{
                 ->get();
             $sticks=$sticks->toBase()->merge($board_sticks);
         }
+        $sticks=$sticks->unique('id')->all();
+
         return $sticks;
     }
 

@@ -38,8 +38,8 @@
                     @foreach($group_admin as $admin)
                         <div class="col-md-6" style="border: solid; border-radius: 5px; border-width: 1px">
                             <a href="{{route('groups.detail',['id'=>$admin->id])}}">
-                            <img src="{{url('storage/'.$o->image_path)}}" alt="profile_image"
-                                 onerror="this.src='{{$o->image_path}}'"
+                            <img src="{{url('storage/'.$admin->image_path)}}" alt="profile_image"
+                                 onerror="this.src='{{$admin->image_path}}'"
                                  style="height: 150px; width: 150px; float:left; border-radius: 50%;margin-right: 25px">
                             <p>{{$admin->name}}</p>
                             </a>
@@ -79,7 +79,7 @@
         </div>
     @endif
 
-    @if($recommended->count()>0)
+    @if(count($recommended)>0)
         <div class="card">
             <div class="card-header">
                 Size Önerdiğimiz Gruplar
@@ -88,6 +88,7 @@
             <div class="card-body">
                 <div class="row">
                     @foreach($recommended as $f)
+                        @if(!Auth::user()->groups->contains($f))
                         <div class="col-md-6" style="border: solid; border-radius: 5px; border-width: 1px">
                             <a href="{{route('groups.detail',['id'=>$f->id])}}">
                                 <img src="{{url('storage/'.$f->image_path)}}" alt="profile_image"
@@ -96,6 +97,7 @@
                                 <p>{{$f->name}}</p>
                             </a>
                         </div>
+                        @endif
                     @endforeach
                 </div>
 

@@ -13,17 +13,23 @@
                 <h1 class="font-weight-bold title">{{$record->username}}</h1>
             </div>
             <div class="col">
-                @if(Auth::user()->isOwnerOf($record))
+                @if(Auth::user()->isBanned($record))
+                    <div class="text-danger">Bu gruptan atıldınız</div>
+                @elseif(Auth::user()->isOwnerOf($record)|| Auth::user()->isAdmin($record))
                     @include('components.edit_button')
-                    @include('components.create_stick_button')
                     @include('components.create_board_button')
+                    @include('components.create_stick_button')
                     @include('components.create_wanted_button')
-                @elseif(!Auth::user()->isMemberOfThis($record))
-                    @include('components.follow_group_button')
-                @else
+
+                @elseif(Auth::user()->isMemberOfThis($record))
+
+                    @include('components.create_stick_button')
                     @include('components.create_wanted_button')
                     @include('components.unfollow_group_button')
+                @else
+                    @include('components.follow_group_button')
                 @endif
+
 
             </div>
         </div>

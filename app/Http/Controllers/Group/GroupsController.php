@@ -383,6 +383,7 @@ class GroupsController extends BaseController{
         $record=$group;
         $users=$group->users()
            //->wherePivot('is_banned','=', false)
+               ->where('id','!=',auth()->user()->id)
             ->get();
         return view('groups.users_index',compact('users','record'));
     }

@@ -14,17 +14,23 @@
                 <h1 class="font-weight-bold title">{{$record->username}}</h1>
             </div>
             <div class="col">
-                @if(Auth::user()->isOwnerOf($record))
+                @if(Auth::user()->isBanned($record))
+                    <div class="text-danger">Bu gruptan atıldınız</div>
+                @elseif(Auth::user()->isOwnerOf($record)|| Auth::user()->isAdmin($record))
                     @include('components.edit_button')
-                    @include('components.create_stick_button')
                     @include('components.create_board_button')
+                    @include('components.create_stick_button')
                     @include('components.create_wanted_button')
-                @elseif(!Auth::user()->isMemberOfThis($record))
-                    @include('components.follow_group_button')
-                @else
+
+                @elseif(Auth::user()->isMemberOfThis($record))
+
+                    @include('components.create_stick_button')
                     @include('components.create_wanted_button')
                     @include('components.unfollow_group_button')
+                @else
+                    @include('components.follow_group_button')
                 @endif
+
 
             </div>
         </div>
@@ -111,6 +117,52 @@
                                    href="#">
                                     <i class="fas fa-trash fa-xs">Engelle</i>
                                 </a>
+                                @include('includes.promote_user_modal',[
+                                         'modal_id'=>'promoteUser'. $user->id ,
+                                         'route'=>$pageUrl.'.promote_user',
+                                         'user'=>$user->id,
+                                         'group'=>$record->id,
+                                         'photo_name'=>'image_url'
+                                         ])
+                                @include('includes.promote_user_modal',[
+                                         'modal_id'=>'depromoteUser'. $user->id ,
+                                         'route'=>$pageUrl.'.depromote_user',
+                                         'user'=>$user->id,
+                                         'group'=>$record->id,
+                                         'photo_name'=>'image_url'
+                                         ])
+                                @include('includes.ban_user_modal',[
+                                         'modal_id'=>'banUser'. $user->id ,
+                                         'route'=>$pageUrl.'.ban_user',
+                                         'user'=>$user->id,
+                                         'group'=>$record->id,
+                                         'photo_name'=>'image_url'
+                                         ])
+                            @endif
+
+                    @elseif(Auth::user()->isAdmin($record))
+
+                        <td>@if($user->isBanned($record))
+                                <div class="text-danger">
+                                    Atıldı
+                                </div>
+                            @else
+                                @if($user->isAdmin($record))
+                                    Grup yöneticisi
+                                @else
+
+                                    <a class="btn btn-info btn-sm" data-toggle="modal"
+                                       data-target="#promoteUser{{ $user->id }}"
+                                       href="#">
+                                        <i class="fas fa-thumbs-up fa-xs">Admin Yap</i>
+                                    </a>
+
+                                <a class="btn btn-danger btn-sm" data-toggle="modal"
+                                   data-target="#banUser{{ $user->id }}"
+                                   href="#">
+                                    <i class="fas fa-trash fa-xs">Engelle</i>
+                                </a>
+                                @endif
                                 @include('includes.promote_user_modal',[
                                          'modal_id'=>'promoteUser'. $user->id ,
                                          'route'=>$pageUrl.'.promote_user',

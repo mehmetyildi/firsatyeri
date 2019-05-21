@@ -118,10 +118,13 @@ class Group extends BaseModel
         foreach ($local_groups as $group) {
             foreach ($user->interests as $interest) {
                 if ($group->interests()->contains($interest)) {
-                    $groups = $groups->toBase()->merge($group->users);
+                    $groups = $groups->toBase()->merge($group);
                 }
             }
         }
+        $groups=$groups->unique('id')->all();
+
+
         return $groups;
     }
 }
