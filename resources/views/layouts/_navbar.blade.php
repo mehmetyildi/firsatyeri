@@ -5,11 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarsDefault">
         <ul class="navbar-nav mr-auto align-items-center">
-            <form class="bd-search hidden-sm-down">
-                <input type="text" class="form-control bg-graylight border-0 font-weight-bold" id="search-input" placeholder="Search..." autocomplete="off">
-                <div class="dropdown-menu bd-search-results" id="search-results">
-                </div>
-            </form>
+           
         </ul>
         <ul class="navbar-nav ml-auto align-items-center">
             <li class="nav-item">
