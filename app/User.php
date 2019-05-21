@@ -206,7 +206,11 @@ class User extends Authenticatable
     }
 
     public function isBanned(Group $group){
-        return $group->users()->where('user_id',$this->id)->first()->pivot->is_banned;
+        if(auth()->user()->groups->contains($group)){
+            return $group->users()->where('user_id',$this->id)->first()->pivot->is_banned;
+
+        }
+        return false;
     }
 
     public function isAdmin(Group $group){

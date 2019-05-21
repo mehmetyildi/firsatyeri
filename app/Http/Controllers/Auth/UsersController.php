@@ -209,7 +209,7 @@ class UsersController extends BaseController{
     }
 
     public function sticks_detail(PageModel $record, Stick $stick ){
-        $boards=$record->boards()->get();
+        $boards=auth()->user()->boards()->get();
         $owned_groups=$record->ownedGroups()->get();
         $admin_of=$record->isAdminOf();
         $groups=$owned_groups->toBase()->merge($admin_of);

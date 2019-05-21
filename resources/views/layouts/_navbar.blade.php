@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarsDefault">
         <ul class="navbar-nav mr-auto align-items-center">
-           
+
         </ul>
         <ul class="navbar-nav ml-auto align-items-center">
             <li class="nav-item">
