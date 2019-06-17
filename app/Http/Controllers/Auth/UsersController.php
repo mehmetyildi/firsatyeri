@@ -184,7 +184,7 @@ class UsersController extends BaseController{
         $interests=Interest::all();
         return view('boards.create',compact('interests','id'));
     }
-
+    //test
     public function store_board(Request $request, $id){
         $this->validate($request, Board::$rules,Board::messages());
 
